@@ -15,6 +15,7 @@ public abstract class Node : MonoBehaviour {
         col.enabled = false;
     }
 
+	// On click execute execute an action
     void OnMouseDown() {
         Arrive();
     }
