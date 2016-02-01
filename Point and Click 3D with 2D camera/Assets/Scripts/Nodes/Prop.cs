@@ -7,9 +7,35 @@ public class Prop : Node {
 
     Interactables inter;
 
+	MeshRenderer childMesh;
+
+	Color previousColor;
+
+	public Material outlinedMaterial;
+
+	Material previousMaterial;
+
     void Start() {
         inter = GetComponent<Interactables>();
+		childMesh = this.GetComponentInChildren<MeshRenderer>();
     }
+
+	void OnMouseEnter(){	
+		changeMaterial();
+	}
+
+	void OnMouseExit(){		
+		childMesh.material = previousMaterial;
+	}
+
+	private void changeMaterial(){
+		childMesh = this.GetComponentInChildren<MeshRenderer>();
+		previousColor = childMesh.material.color;
+		previousMaterial = childMesh.material;
+
+		childMesh.material = outlinedMaterial;
+		childMesh.material.color = previousColor;
+	}
 
 
     public override void Arrive() {

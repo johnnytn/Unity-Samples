@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     public IVCanvas ivCanvas;
     public CameraRig rig;
     public ObsCamera obsCamera;
+	public Item itemHeld;
 
     void Awake() {
         gm = this;
