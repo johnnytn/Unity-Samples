@@ -4,40 +4,36 @@ using System.Collections;
 public class Prop : Node {
 
     public Location loc;
-
     Interactables inter;
 
 	MeshRenderer childMesh;
-
 	Color previousColor;
-
 	public Material outlinedMaterial;
+	Material previousMaterial;    
 
-	Material previousMaterial;
+    public Texture2D cursorTexture;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
 
     void Start() {
         inter = GetComponent<Interactables>();
 		childMesh = this.GetComponentInChildren<MeshRenderer>();
     }
 
-	void OnMouseEnter(){	
-		changeMaterial();
+	void OnMouseEnter(){
+        // Change the cursor icon
+        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+        changeMaterial();
 	}
 
-	void OnMouseExit(){		
-		childMesh.material = previousMaterial;
+	void OnMouseExit(){
+        // Remove the cursor icon
+        Cursor.SetCursor(null, Vector2.zero, cursorMode);
+        // Restore the last material
+        childMesh.material = previousMaterial;
 	}
 
-	private void changeMaterial(){
-		childMesh = this.GetComponentInChildren<MeshRenderer>();
-		previousColor = childMesh.material.color;
-		previousMaterial = childMesh.material;
-
-		childMesh.material = outlinedMaterial;
-		childMesh.material.color = previousColor;
-	}
-
-
+    // Arrive on the node
     public override void Arrive() {
         if (inter != null && inter.enabled) {
             inter.Interact();
@@ -56,10 +52,22 @@ public class Prop : Node {
         }
     }
 
+    // Leave the node
     public override void Leave() {
         base.Leave();
         if (inter != null) {
             inter.enabled = false;
         }
     }
+
+    // Change the prop material
+    private void changeMaterial() {
+        childMesh = this.GetComponentInChildren<MeshRenderer>();
+        previousColor = childMesh.material.color;
+        previousMaterial = childMesh.material;
+
+        childMesh.material = outlinedMaterial;
+        childMesh.material.color = previousColor;
+    }
+
 }

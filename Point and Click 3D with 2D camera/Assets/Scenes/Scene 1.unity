@@ -683,6 +683,9 @@ MonoBehaviour:
   - {fileID: 1614874852}
   loc: {fileID: 163742713}
   outlinedMaterial: {fileID: 2100000, guid: 96bbea02dc6bd694f8fd1276a2584976, type: 2}
+  cursorTexture: {fileID: 2800000, guid: ce53b867054d92446965e0974ccfe9a8, type: 3}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!135 &359210536
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2903,6 +2906,9 @@ MonoBehaviour:
   reachableNodes: []
   loc: {fileID: 163742713}
   outlinedMaterial: {fileID: 2100000, guid: 96bbea02dc6bd694f8fd1276a2584976, type: 2}
+  cursorTexture: {fileID: 0}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!65 &1614874853
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3671,6 +3677,9 @@ MonoBehaviour:
   - {fileID: 559831232}
   loc: {fileID: 559831232}
   outlinedMaterial: {fileID: 2100000, guid: 96bbea02dc6bd694f8fd1276a2584976, type: 2}
+  cursorTexture: {fileID: 0}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!1 &2038152277
 GameObject:
   m_ObjectHideFlags: 0
