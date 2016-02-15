@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
     public static GameManager gm;
+
     [HideInInspector]
     public Node currentNote;
-
     public Node startingNode;
-    public IVCanvas ivCanvas;
+
 	public Player player;
-    public CameraRig rig;
+    public List<Item> itensHeld = null;
+    public InventoryDisplay invDisp;
+    public IVCanvas ivCanvas;
     public ObsCamera obsCamera;
 
     void Awake() {
