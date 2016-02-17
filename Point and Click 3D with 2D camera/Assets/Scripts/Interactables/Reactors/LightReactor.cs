@@ -4,6 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(MeshRenderer))]
 public class LightReactor : StateReactor {
 
+    public bool activeLight;
     public Color active;
     public Color inactive;
     Light lightScource;
@@ -13,10 +14,10 @@ public class LightReactor : StateReactor {
         lightScource = GetComponent<Light>();
         React();
     }
-   
+
     public override void React() {
         //active/deactive light
-        lightScource.enabled = switcher.state;
+        lightScource.enabled = activeLight ? activeLight : switcher.state;
         lightScource.color = switcher.state ? active : inactive;
     }
 

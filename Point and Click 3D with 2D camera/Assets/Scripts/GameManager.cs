@@ -9,21 +9,17 @@ public class GameManager : MonoBehaviour {
     public Node currentNote;
     public Node startingNode;
 
-    public Player player;    
+    public Player player;
     public InventoryDisplay invDisp;
     public IVCanvas ivCanvas;
     public ObsCamera obsCamera;
-    
+    public Loading load;
+
     // Cursor Icon
     public Texture2D cursorTexture;
 
     void Awake() {
-        if (gm == null) {
-            gm = this;
-        } else if (gm != this) {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
+        PrepareGameManager();
 
         ivCanvas.gameObject.SetActive(false);
         obsCamera.gameObject.SetActive(false);
@@ -35,6 +31,11 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        CloseInspectors();
+
+    }
+
+    private void CloseInspectors() {
         if (Input.GetMouseButtonDown(1) && currentNote.GetComponent<Prop>() != null) {
             if (ivCanvas.gameObject.activeInHierarchy) {
                 ivCanvas.Close();
@@ -46,5 +47,14 @@ public class GameManager : MonoBehaviour {
             }
             currentNote.GetComponent<Prop>().loc.Arrive();
         }
+    }
+
+    private void PrepareGameManager() {
+        if (gm == null) {
+            gm = this;
+        } else if (gm != this) {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
     }
 }

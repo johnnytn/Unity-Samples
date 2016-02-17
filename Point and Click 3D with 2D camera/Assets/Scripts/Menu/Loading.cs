@@ -5,9 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class Loading : MonoBehaviour {
 
-    public Slider loadingBar;
     public GameObject loadingImage;
+    private Slider loadingBar;
     private AsyncOperation async;
+
+    void Awake() {
+        if (loadingImage != null) {
+            loadingBar = loadingImage.GetComponentInChildren<Slider>();
+        }
+    }
 
     //  Load a scene 
     public void LoadingScene(int level) {

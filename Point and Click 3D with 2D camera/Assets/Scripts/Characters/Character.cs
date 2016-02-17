@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using DG.Tweening;
 
-public class Player : MonoBehaviour {
-
-    public List<Item> itensHeld = null;
+public class Character : MonoBehaviour {
 
     // Movement varibles
     public Transform yAxis;

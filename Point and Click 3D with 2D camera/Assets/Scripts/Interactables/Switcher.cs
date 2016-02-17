@@ -5,7 +5,7 @@ public class Switcher : Interactables {
 
     public bool state;
 
-    //event setup
+    //Event setup
     public delegate void OnStateChange();
     public event OnStateChange Change;
 
