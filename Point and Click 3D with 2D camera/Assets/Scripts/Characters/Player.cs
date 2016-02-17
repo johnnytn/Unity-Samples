@@ -8,9 +8,7 @@ public class Player : Character {
     public List<Item> itensHeld = null;
 
     void OnTriggerEnter(Collider col) {
-               
-       // col. 
-        SceneManager.LoadScene(1);
+        //SceneManager.LoadScene(1);
     }
 
 }
