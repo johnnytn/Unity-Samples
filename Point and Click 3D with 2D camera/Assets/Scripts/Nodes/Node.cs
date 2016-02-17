@@ -32,7 +32,7 @@ public abstract class Node : MonoBehaviour {
         GameManager.gm.currentNote = this;
 
         // move the player
-        GameManager.gm.player.AlignTo(cameraPosition);
+        GameManager.gm.player.MoveTo(cameraPosition);
 
         // turn off our own collider
         if (col != null) {

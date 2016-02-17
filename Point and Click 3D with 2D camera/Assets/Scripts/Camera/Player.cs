@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 
 public class Player : MonoBehaviour {
 
+    public List<Item> itensHeld = null;
+
+    // Movement varibles
     public Transform yAxis;
     public Transform xAxis;
     public float moveTime;
 
-    public void AlignTo(Transform target) {
-        // mode the player
+    public void MoveTo(Transform target) {
+        // Move the player
         Sequence seq = DOTween.Sequence();
         seq.Append(yAxis.DOMove(target.position, moveTime));
         seq.Join(yAxis.DORotate(new Vector3(0f, target.rotation.eulerAngles.y, 0f), moveTime));

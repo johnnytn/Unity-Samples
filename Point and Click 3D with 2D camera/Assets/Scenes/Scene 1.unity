@@ -686,7 +686,6 @@ MonoBehaviour:
   - {fileID: 1614874852}
   loc: {fileID: 163742713}
   outlinedMaterial: {fileID: 2100000, guid: 96bbea02dc6bd694f8fd1276a2584976, type: 2}
-  cursorTexture: {fileID: 2800000, guid: ce53b867054d92446965e0974ccfe9a8, type: 3}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
 --- !u!135 &359210536
@@ -1310,10 +1309,10 @@ MonoBehaviour:
   currentNote: {fileID: 0}
   startingNode: {fileID: 1875517229}
   player: {fileID: 1626687595}
-  itensHeld: []
   invDisp: {fileID: 1227529644}
   ivCanvas: {fileID: 752153568}
   obsCamera: {fileID: 1526264798}
+  cursorTexture: {fileID: 2800000, guid: b4931fe97d1ac4e48951e69fb5d4a2f3, type: 3}
 --- !u!4 &730458172
 Transform:
   m_ObjectHideFlags: 0
@@ -1557,7 +1556,7 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 849419193}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 6
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2980,7 +2979,6 @@ MonoBehaviour:
   reachableNodes: []
   loc: {fileID: 163742713}
   outlinedMaterial: {fileID: 2100000, guid: 96bbea02dc6bd694f8fd1276a2584976, type: 2}
-  cursorTexture: {fileID: 0}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
 --- !u!65 &1614874853
@@ -3074,6 +3072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f9af9316f26944eb02542863492d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itensHeld: []
   yAxis: {fileID: 1626687593}
   xAxis: {fileID: 900235897}
   moveTime: 0.75
@@ -3849,7 +3848,6 @@ MonoBehaviour:
   - {fileID: 559831232}
   loc: {fileID: 559831232}
   outlinedMaterial: {fileID: 2100000, guid: 96bbea02dc6bd694f8fd1276a2584976, type: 2}
-  cursorTexture: {fileID: 0}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
 --- !u!1 &2038152277

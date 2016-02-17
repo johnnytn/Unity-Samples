@@ -18,7 +18,7 @@ public class Prerequisite : MonoBehaviour {
                 return watchSwitcher.state;
 
             } else {
-                return GameManager.gm.itensHeld.Contains(checkCollector.item);
+                return GameManager.gm.player.itensHeld.Contains(checkCollector.item);
             }
 
         }

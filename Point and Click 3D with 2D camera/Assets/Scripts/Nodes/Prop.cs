@@ -6,32 +6,34 @@ public class Prop : Node {
     public Location loc;
     Interactables inter;
 
-	MeshRenderer childMesh;
-	Color previousColor;
-	public Material outlinedMaterial;
-	Material previousMaterial;    
+    // Object material variables
+    MeshRenderer childMesh;
+    Color previousColor;
+    public Material outlinedMaterial;
+    Material previousMaterial;
 
-    public Texture2D cursorTexture;
+    // Cursor variables
+    //public Texture2D cursorTexture;
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
 
     void Start() {
         inter = GetComponent<Interactables>();
-		childMesh = this.GetComponentInChildren<MeshRenderer>();
+        childMesh = this.GetComponentInChildren<MeshRenderer>();
     }
 
-	void OnMouseEnter(){
+    void OnMouseEnter() {
         // Change the cursor icon
-        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
-        changeMaterial();
-	}
+        Cursor.SetCursor(GameManager.gm.cursorTexture, hotSpot, cursorMode);
+        //changeMaterial();
+    }
 
-	void OnMouseExit(){
+    void OnMouseExit() {
         // Remove the cursor icon
         Cursor.SetCursor(null, Vector2.zero, cursorMode);
         // Restore the last material
-        childMesh.material = previousMaterial;
-	}
+       // childMesh.material = previousMaterial;
+    }
 
     // Arrive on the node
     public override void Arrive() {
@@ -39,9 +41,9 @@ public class Prop : Node {
             inter.Interact();
             return;
         }
-                base.Arrive();
+        base.Arrive();
 
-        // make this object interactable if prerequisite os met
+        // Make this object interactable if prerequisite is met
         if (inter != null) {
             Prerequisite pre = GetComponent<Prerequisite>();
             if (pre && !pre.Complete) {

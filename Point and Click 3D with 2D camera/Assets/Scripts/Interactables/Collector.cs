@@ -7,7 +7,7 @@ public class Collector : Interactables {
 
     public override void Interact() {
         Debug.Log("Adding item");
-        List<Item> itens = GameManager.gm.itensHeld;
+        List<Item> itens = GameManager.gm.player.itensHeld;
         if (itens == null) {
             itens = new List<Item>();
         }

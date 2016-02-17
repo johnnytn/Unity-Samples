@@ -3,20 +3,28 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
-    public static GameManager gm;
+    public static GameManager gm = null;
 
     [HideInInspector]
     public Node currentNote;
     public Node startingNode;
 
-	public Player player;
-    public List<Item> itensHeld = null;
+    public Player player;    
     public InventoryDisplay invDisp;
     public IVCanvas ivCanvas;
     public ObsCamera obsCamera;
+    
+    // Cursor Icon
+    public Texture2D cursorTexture;
 
     void Awake() {
-        gm = this;
+        if (gm == null) {
+            gm = this;
+        } else if (gm != this) {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+
         ivCanvas.gameObject.SetActive(false);
         obsCamera.gameObject.SetActive(false);
     }

@@ -10,10 +10,7 @@ public class Switcher : Interactables {
     public event OnStateChange Change;
 
     public override void Interact() {
-        state = !state;
-      //  if(GetComponent<StateReactor>()!= null) {
-       ///     GetComponent<StateReactor>().React();
-      //  }
+        state = !state;    
 
         if(Change != null) {
             Change();
