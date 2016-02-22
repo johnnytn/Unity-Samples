@@ -9,7 +9,9 @@ public class ItemController : MonoBehaviour {
     public Item item;
     public Sprite sprite;
 
-    // Set the references of the item into the InventoryController using an Event Trigger
+    /**
+    * Set the references of the slot into the InventoryController using an Event Trigger
+    */
     public void SetReferences(bool mouseOver) {
         InventoryController invControl = transform.parent.parent.GetComponent<InventoryController>();
         if (canDragItem) {

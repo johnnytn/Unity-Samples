@@ -6,16 +6,23 @@ public class IVCanvas : MonoBehaviour {
 
     public Image imageHolder;
 
-    // Open canvas image
+    /**
+    * Open canvas image
+    */
     public void Open(Sprite pic) {
         ChangeImage(pic, true);
     }
 
-    // Close canvas image
+    /**
+    * Close canvas image
+    */
     public void Close() {
         ChangeImage(null, false);
     }
 
+    /**
+    * Change the canvas image
+    */
     private void ChangeImage(Sprite pic, bool active) {
         Node currentNote = GameManager.gm.currentNote;
         currentNote.setReachableNode(!active);

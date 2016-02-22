@@ -11,7 +11,9 @@ public class Prerequisite : MonoBehaviour {
     //if requireItem is true, we'll check this collector
     public Collector checkCollector;
 
-    // Check if prerequisite is met
+    /**
+    * Check if prerequisite is met
+    */
     public bool Complete {
         get {
             if (!requireItem) {

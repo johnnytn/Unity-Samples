@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Observer : Interactables {
 
+    /**
+    * Instantiate an object to be observed
+    */
     public override void Interact() {
         GameObject item = Instantiate(gameObject);
         item.transform.SetParent(GameManager.gm.obsCamera.rig);

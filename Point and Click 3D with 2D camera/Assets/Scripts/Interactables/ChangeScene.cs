@@ -5,8 +5,10 @@ public class ChangeScene : Interactables {
 
     public int nextLevel;
 
+    /**
+     * Move to the next Scene
+     */
     public override void Interact() {
-        Debug.Log("Next level:" + nextLevel);
         GameManager.gm.load.LoadingScene(nextLevel);
     }
 }

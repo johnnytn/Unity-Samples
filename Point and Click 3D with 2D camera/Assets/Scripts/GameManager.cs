@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    /**
+    * Close UI elements used to inspect objects
+    */
     private void CloseInspectors() {
         if (Input.GetMouseButtonDown(1) && currentNote.GetComponent<Prop>() != null) {
             if (ivCanvas.gameObject.activeInHierarchy) {
@@ -49,6 +52,9 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /**
+    * Prepare GM before the game starts
+    */
     private void PrepareGameManager() {
         if (gm == null) {
             gm = this;

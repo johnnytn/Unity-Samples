@@ -18,26 +18,34 @@ public class Menu : MonoBehaviour {
         quitMenu.enabled = false;
     }
 
-    // Open quit menu
+    /** 
+    * Open quit menu
+    */
     public void QuitMenu() {
         quitMenu.enabled = true;
         startButton.enabled = false;
         exitButton.enabled = false;
     }
 
-    // Close quit menu
+    /** 
+    * Close quit menu
+    */
     public void CloseQuitMenu() {
         quitMenu.enabled = false;
         startButton.enabled = true;
         exitButton.enabled = true;
     }
-
-    // Load a level
+        
+    /** 
+    * Load a level
+    */
     public void LoadLevel(int level) {        
         load.LoadingScene(level);
     }
 
-    // Exit the game
+    /** 
+    * Exit the game
+    */
     public void Exit() {
         Application.Quit();
     }

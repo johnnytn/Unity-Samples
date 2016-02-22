@@ -22,7 +22,9 @@ public class ObsCamera : MonoBehaviour {
     }
 
 
-    // Rotate the current interactable
+    /**
+     * Rotate the current interactable
+     */
     public void ObjectRotation() {
         float yRot = Input.GetAxis("Mouse X") * sensitivity;
         float xRot = Input.GetAxis("Mouse Y") * sensitivity;
@@ -52,6 +54,9 @@ public class ObsCamera : MonoBehaviour {
         return q;
     }
 
+    /**
+     * Close the observer view
+     */
     public void Close() {
         Destroy(model.gameObject);
         rig.rotation = Quaternion.identity;

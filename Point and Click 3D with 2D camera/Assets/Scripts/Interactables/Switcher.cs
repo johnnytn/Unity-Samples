@@ -11,7 +11,6 @@ public class Switcher : Interactables {
 
     public override void Interact() {
         state = !state;    
-
         if(Change != null) {
             Change();
         }

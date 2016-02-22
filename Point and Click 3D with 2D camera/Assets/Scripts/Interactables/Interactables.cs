@@ -9,7 +9,9 @@ public abstract class Interactables : MonoBehaviour {
         this.enabled = false;
 	}
 
-    // Deafult object interaction
+    /**
+    *Deafult object interaction
+    */
     public virtual void Interact() {
         Debug.Log("interacting with" + name);
     }

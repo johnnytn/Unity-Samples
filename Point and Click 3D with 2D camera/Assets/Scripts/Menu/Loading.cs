@@ -15,13 +15,17 @@ public class Loading : MonoBehaviour {
         }
     }
 
-    //  Load a scene 
+    /**
+    * Load a Scene
+    */
     public void LoadingScene(int level) {
         loadingImage.SetActive(true);
         StartCoroutine(LoadLevelWithBar(level));
     }
 
-    // Load a scene displaying a loading bar
+    /**
+    * Load a Scene displaying a loading bar
+    */
     IEnumerator LoadLevelWithBar(int level) {
         async = SceneManager.LoadSceneAsync(level);
 

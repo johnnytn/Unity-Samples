@@ -20,7 +20,10 @@ public abstract class Node : MonoBehaviour {
         Arrive();
     }
 
-    // Move the player to the node, updating colliders and reachable nodes
+    
+    /**
+    * Move the player to the node, updating colliders and reachable nodes
+    */
     public virtual void Arrive() {
         // leave existing currentNode
         Node currentNode = GameManager.gm.currentNote;
@@ -28,13 +31,13 @@ public abstract class Node : MonoBehaviour {
             currentNode.Leave();
         }
 
-        // set current node
+        // Set current node
         GameManager.gm.currentNote = this;
 
-        // move the player
+        // Move the player
         GameManager.gm.player.MoveTo(cameraPosition);
 
-        // turn off our own collider
+        // Turn off our own collider
         if (col != null) {
             col.enabled = false;
         }
@@ -45,8 +48,10 @@ public abstract class Node : MonoBehaviour {
     public virtual void Leave() {
         setReachableNode(false);
     }
-
-    // turn on/off all reachable node's colliders
+    
+    /**
+    * Turn on/off all reachable node's colliders
+    */
     public void setReachableNode(bool set) {
         foreach (Node node in reachableNodes) {
             if (node.col != null) {

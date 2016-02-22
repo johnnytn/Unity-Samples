@@ -35,7 +35,9 @@ public class Prop : Node {
        // childMesh.material = previousMaterial;
     }
 
-    // Arrive on the node
+    /** 
+    * Arrive in the node
+    */
     public override void Arrive() {
         if (inter != null && inter.enabled) {
             inter.Interact();
@@ -54,7 +56,9 @@ public class Prop : Node {
         }
     }
 
-    // Leave the node
+    /** 
+    * Leave the node
+    */
     public override void Leave() {
         base.Leave();
         if (inter != null) {
@@ -62,7 +66,9 @@ public class Prop : Node {
         }
     }
 
-    // Change the prop material
+    /** 
+    * Change the prop material
+    */
     private void changeMaterial() {
         childMesh = this.GetComponentInChildren<MeshRenderer>();
         previousColor = childMesh.material.color;

@@ -8,6 +8,9 @@ public class Character : MonoBehaviour {
     public Transform xAxis;
     public float moveTime;
 
+    /** 
+    * Move the Character to a target position
+    */
     public void MoveTo(Transform target) {
         // Move the player
         Sequence seq = DOTween.Sequence();

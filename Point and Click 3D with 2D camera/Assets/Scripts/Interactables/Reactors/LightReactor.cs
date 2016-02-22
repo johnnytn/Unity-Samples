@@ -15,8 +15,10 @@ public class LightReactor : StateReactor {
         React();
     }
 
+    /**
+    * Active/deactive light
+    */
     public override void React() {
-        //active/deactive light
         lightScource.enabled = activeLight ? activeLight : switcher.state;
         lightScource.color = switcher.state ? active : inactive;
     }

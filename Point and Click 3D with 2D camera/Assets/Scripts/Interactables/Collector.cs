@@ -5,6 +5,9 @@ public class Collector : Interactables {
 
     public Item item;
 
+    /**
+     * Collect an Item and add to the Player Inventory
+     */
     public override void Interact() {
         Debug.Log("Adding item");
         List<Item> itens = GameManager.gm.player.itensHeld;

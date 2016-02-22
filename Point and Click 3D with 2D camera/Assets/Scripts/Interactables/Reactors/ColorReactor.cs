@@ -14,8 +14,10 @@ public class ColorReactor : StateReactor {
         React();
     }
 
+    /**
+    * Change the color of a reactor
+    */
     public override void React() {
-        //change the color of an color reactor
         mesh.material.color = switcher.state ? active : inactive;
     }
 
