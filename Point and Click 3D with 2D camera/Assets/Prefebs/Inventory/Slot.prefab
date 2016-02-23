@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11401782}
   m_Layer: 5
   m_Name: Slot
-  m_TagString: Untagged
+  m_TagString: Slot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,6 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dbf8e0134747f64ab36a0458b839835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coords: {x: 0, y: 0}
+  isEmpty: 1
 --- !u!114 &11492764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,6 +167,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Slot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

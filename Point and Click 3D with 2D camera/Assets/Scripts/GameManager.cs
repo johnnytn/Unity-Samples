@@ -14,7 +14,7 @@ public class GameManager : Util {
     public IVCanvas ivCanvas;
     public ObsCamera obsCamera;
     public Loading load;
-
+    public GameObject inventory;
     // Cursor Icon
     public Texture2D cursorTexture;
 
@@ -24,7 +24,7 @@ public class GameManager : Util {
 
     void Awake() {
         PrepareGameManager();
-        PrepareItens();
+        PrepareInventory();
         ivCanvas.gameObject.SetActive(false);
         obsCamera.gameObject.SetActive(false);
     }
@@ -67,6 +67,12 @@ public class GameManager : Util {
         DontDestroyOnLoad(gameObject);
     }
 
+    private void PrepareInventory() {
+        inventory.GetComponent<InventoryController>().CreateSlots();
+        PrepareItens();
+        inventory.GetComponent<InventoryController>().CreateAndRecreatetInvetory();
+    }
+
     /**
     * Prepare the Item list, creating Itens and populating a List
     */
@@ -76,7 +82,7 @@ public class GameManager : Util {
         ItemController ic = gameObject.AddComponent<ItemController>();
         ic.item = item;
         ic.sprite = sprites[0];
-        ic.coords = new Vector2(1,1);
+        ic.coords = new Vector2(1, 1);
         allItens.Add(ic);
 
         // Item
@@ -106,6 +112,9 @@ public class GameManager : Util {
         SortAllItens();
     }
 
+    /**
+     * Add an Item to the list
+     */
     public void AddItem(ItemController ic) {
         allItens.Add(ic);
         SortAllItens();
@@ -116,9 +125,7 @@ public class GameManager : Util {
     */
     public void SortAllItens() {
         sortedItens.Clear();
-        foreach (ItemController i in allItens) {
-            sortedItens.Add(i);
-        }
+        sortedItens.AddRange(allItens);
     }
 
     /**
@@ -131,5 +138,31 @@ public class GameManager : Util {
                 sortedItens.Add(i);
             }
         }
+    }
+
+    /**
+    * Get the position of the next empty slot
+    */
+    public Vector2 getEmptySlotPos() {
+        int xPos = 1;
+        int yPos = 1;
+        bool isCoordsSet = false;
+        Vector2 coords = new Vector2(xPos, yPos);
+
+        InventoryController invControl = inventory.GetComponent<InventoryController>();
+        for (int y = 1; y <= invControl.invetorySize.y; y++) {
+            for (int x = 1; x <= invControl.invetorySize.x; x++) {
+                Transform slot = inventory.transform.Find("slot_" + x + "_" + y);
+
+                SlotController sc = slot.GetComponent<SlotController>();
+                if (sc.isEmpty && !isCoordsSet) {
+                    coords = sc.coords;
+                    isCoordsSet = true;
+                    sc.isEmpty = false;
+                    break;
+                }
+            }
+        }
+        return coords;
     }
 }

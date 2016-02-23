@@ -17,10 +17,11 @@ public class Collector : Interactables {
         ItemController ic = createItemController();
         itens.Add(item);
         gm.AddItem(ic);
-        GameObject.Destroy(this.gameObject, 0.1f);
+        gm.inventory.GetComponent<InventoryController>().CreateAndRecreatetInvetory();
 
         // Display Item name in UI
         gm.invDisp.UpdateDisplay();
+        GameObject.Destroy(this.gameObject, 0.1f);
     }
 
     private ItemController createItemController() {
@@ -28,7 +29,8 @@ public class Collector : Interactables {
         ic.item = this.item;
         ic.sprite = this.sprite;
         ic.canDragItem = this.canDragItem;
-        ic.coords = new Vector2(4, 2);
+        ic.coords = GameManager.gm.getEmptySlotPos();
+
         return ic;
     }
 

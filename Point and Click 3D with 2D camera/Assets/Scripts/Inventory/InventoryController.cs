@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour {
@@ -18,7 +19,7 @@ public class InventoryController : MonoBehaviour {
 
     // Use this for initialization
     void Awake() {
-        CreateSlots();
+//        CreateSlots();
     }
 
     /**
@@ -50,8 +51,7 @@ public class InventoryController : MonoBehaviour {
     }
 
     /**
-    * Create the Inventory with a X numbers of lines and Y numbers of columns, 
-    * also instatiate the itens of the player    
+    * Create the Inventory with a X numbers of lines and Y numbers of columns
     */
     public void CreateSlots() {
         for (int x = 1; x <= invetorySize.x; x++) {
@@ -59,13 +59,22 @@ public class InventoryController : MonoBehaviour {
                 GameObject slot = Instantiate(slotPrefab) as GameObject;
                 slot.transform.SetParent(this.transform);
                 slot.name = "slot_" + x + "_" + y;
+                slot.GetComponent<SlotController>().coords = new Vector2(x, y);
+                slot.GetComponent<SlotController>().isEmpty = true;
+                slot.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+
+                // Calculate the position of the slot based on the window size and inventory size
+                float xPos = windowSize.x / (invetorySize.x + 1) * x;
+                float yPos = windowSize.y / (invetorySize.y + 1) * -y;
                 // Attach a slot to the anchor
-                slot.GetComponent<RectTransform>().anchoredPosition = new Vector3(windowSize.x / (invetorySize.x + 1) * x,
-                                                                                  windowSize.y / (invetorySize.y + 1) * -y, 0);
+                slot.GetComponent<RectTransform>().anchoredPosition = new Vector3(xPos, yPos, 0);
             }
         }
     }
 
+    /**
+    * Clear the invetory Slots, deleting the Itens
+    */
     public void ClearSlots() {
         foreach (Transform t in this.transform) {
             if (!t.tag.Equals("UI") && t.childCount > 0) {
@@ -74,6 +83,9 @@ public class InventoryController : MonoBehaviour {
         }
     }
 
+    /**
+    * Create the invetory Itens
+    */
     private void CreateInvetory() {
         for (int n = 0; n < GameManager.gm.sortedItens.Count; n++) {
             ItemController iData = GameManager.gm.sortedItens[n];
@@ -82,8 +94,11 @@ public class InventoryController : MonoBehaviour {
                 GameObject item = Instantiate(itemPrefab) as GameObject;
                 item.name = iData.item.name;
                 item.GetComponent<Image>().sprite = iData.sprite;
-                item.transform.SetParent(transform.Find("slot_" + coords.x + "_" + coords.y));
+                Transform slot = transform.Find("slot_" + coords.x + "_" + coords.y);
+                item.transform.SetParent(slot);
+                slot.GetComponent<SlotController>().isEmpty = false;
                 item.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+                item.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
 
                 // Item component
                 ItemController i = item.GetComponent<ItemController>();
@@ -118,19 +133,12 @@ public class InventoryController : MonoBehaviour {
                     ItemController slotItemIC = slotChild.GetComponent<ItemController>();
                     // Stack Itens
                     if (isStackable(slotChild, selectedIC)) {
-
                         selectedIC.IncreaseAmount(slotItemIC.item.amount);
                         Destroy(slotChild.gameObject);
-                        Debug.Log("Destroying");
                         // Swap Item 
                     } else {
-                       // Vector2 oldPos = selectedIC.coords;
-                        //Vector2 newPos = slotItemIC.coords;
-                       // Debug.Log("oldPos:" + oldPos);
-                        //Debug.Log("newPos:" + newPos);
-                        //selectedIC.coords = oldPos;
-                        //slotItemIC.coords = newPos;
 
+                        //ChangeCoordinates(selectedIC, slotItemIC);
                         // Change the parent of the item in the slot
                         slotChild.SetParent(originalSlot);
                         // Move the item to the previous location of the item you're holding
@@ -143,6 +151,18 @@ public class InventoryController : MonoBehaviour {
             selectedItem.localPosition = Vector3.zero;
             //selectedItem.GetComponent<Image>().raycastTarget = true;
         }
+    }
+
+    //TODO 
+    private void ChangeCoordinates(ItemController selectedIC, ItemController slotItemIC) {
+        // Vector2 oldPos = selectedIC.coords;
+        //Vector2 newPos = slotItemIC.coords;
+        // Debug.Log("oldPos:" + oldPos);
+        //Debug.Log("newPos:" + newPos);
+        //selectedIC.coords = oldPos;
+        //slotItemIC.coords = newPos;
+        //GameManager.gm.allItens
+        throw new NotImplementedException();
     }
 
     /**
@@ -160,6 +180,7 @@ public class InventoryController : MonoBehaviour {
     private bool isStackable(Transform slotChild, ItemController selectedIC) {
         return selectedItem.name == slotChild.name
                && !selectedIC.item.Equals(slotChild.GetComponent<ItemController>().item) &&
-               (selectedIC.item.type == ItemType.USABLE /*|| selectedIC.item.type == ItemType.MISCELLANEOUS*/);
+               (selectedIC.item.type == ItemType.USABLE || selectedIC.item.type == ItemType.MISCELLANEOUS);
     }
+       
 }

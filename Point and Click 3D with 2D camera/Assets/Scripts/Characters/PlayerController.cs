@@ -21,16 +21,11 @@ public class PlayerController : MonoBehaviour {
 
     private void ToggleInventory() {
         bool isActive = inventory.activeInHierarchy;
-        inventory.SetActive(!isActive);
-        if (!isActive) {
-            inventory.GetComponent<InventoryController>().CreateAndRecreatetInvetory();
-        } else {
-            inventory.GetComponent<InventoryController>().ClearSlots();
-        }
+        inventory.SetActive(!isActive);     
         DisablePlayer(!isActive);
     }
     private void DisablePlayer(bool flag) {
-        Time.timeScale = flag ? 1 : 0;
+        //Time.timeScale = !flag ? 1 : 0;
         player.GetComponent<Player>().enabled = flag;
     }
 
