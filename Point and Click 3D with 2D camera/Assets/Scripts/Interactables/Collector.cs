@@ -28,6 +28,7 @@ public class Collector : Interactables {
         ic.item = this.item;
         ic.sprite = this.sprite;
         ic.canDragItem = this.canDragItem;
+        ic.coords = new Vector2(4, 2);
         return ic;
     }
 

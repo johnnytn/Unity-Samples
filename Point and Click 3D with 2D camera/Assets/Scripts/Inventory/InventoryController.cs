@@ -17,8 +17,8 @@ public class InventoryController : MonoBehaviour {
     public Vector2 windowSize;
 
     // Use this for initialization
-    void Start() {
-        CreateInvetory();
+    void Awake() {
+        CreateSlots();
     }
 
     /**
@@ -44,11 +44,7 @@ public class InventoryController : MonoBehaviour {
         if (this.transform.childCount < 1) {
             CreateInvetory();
         } else {
-            foreach (Transform t in this.transform) {
-                if (!t.tag.Equals("UI")) {
-                    Destroy(t.gameObject);
-                }
-            }
+            ClearSlots();
             CreateInvetory();
         }
     }
@@ -57,7 +53,7 @@ public class InventoryController : MonoBehaviour {
     * Create the Inventory with a X numbers of lines and Y numbers of columns, 
     * also instatiate the itens of the player    
     */
-    private void CreateInvetory() {
+    public void CreateSlots() {
         for (int x = 1; x <= invetorySize.x; x++) {
             for (int y = 1; y <= invetorySize.y; y++) {
                 GameObject slot = Instantiate(slotPrefab) as GameObject;
@@ -66,25 +62,39 @@ public class InventoryController : MonoBehaviour {
                 // Attach a slot to the anchor
                 slot.GetComponent<RectTransform>().anchoredPosition = new Vector3(windowSize.x / (invetorySize.x + 1) * x,
                                                                                   windowSize.y / (invetorySize.y + 1) * -y, 0);
-                int pos = x + (y - 1) * 4;
-                if (pos <= GameManager.gm.sortedItens.Count) {
-                    GameObject item = Instantiate(itemPrefab) as GameObject;
-                    item.transform.SetParent(slot.transform);
-                    item.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-                    ItemController i = item.GetComponent<ItemController>();
-
-                    // Item component
-                    i.item.name = GameManager.gm.sortedItens[pos - 1].item.name;
-                    i.item.type = GameManager.gm.sortedItens[pos - 1].item.type;
-                    i.item.description = GameManager.gm.sortedItens[pos - 1].item.description;
-                    i.sprite = GameManager.gm.sortedItens[pos - 1].sprite;
-
-                    item.name = i.item.name;
-                    item.GetComponent<Image>().sprite = i.sprite;
-                }
             }
         }
     }
+
+    public void ClearSlots() {
+        foreach (Transform t in this.transform) {
+            if (!t.tag.Equals("UI") && t.childCount > 0) {
+                Destroy(t.GetChild(0).gameObject);
+            }
+        }
+    }
+
+    private void CreateInvetory() {
+        for (int n = 0; n < GameManager.gm.sortedItens.Count; n++) {
+            ItemController iData = GameManager.gm.sortedItens[n];
+            Vector2 coords = iData.coords;
+            if (coords != Vector2.zero) {
+                GameObject item = Instantiate(itemPrefab) as GameObject;
+                item.name = iData.item.name;
+                item.GetComponent<Image>().sprite = iData.sprite;
+                item.transform.SetParent(transform.Find("slot_" + coords.x + "_" + coords.y));
+                item.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+
+                // Item component
+                ItemController i = item.GetComponent<ItemController>();
+                i.item = iData.item;
+                i.sprite = iData.sprite;
+                i.coords = iData.coords;
+                i.canDragItem = true;
+            }
+        }
+    }
+
     /**
     * Drag an Item to a Slot, if there is an other Item, exchange places    
     */
@@ -97,6 +107,7 @@ public class InventoryController : MonoBehaviour {
         } else if (Input.GetMouseButtonUp(0)) {
             canDragItem = false;
             SetDragableItens(true);
+            Debug.Log("aqui");
 
             if (selectedSlot == null) {
                 selectedItem.SetParent(originalSlot);
@@ -104,14 +115,22 @@ public class InventoryController : MonoBehaviour {
                 if (selectedSlot.childCount > 0) {
                     Transform slotChild = selectedSlot.GetChild(0);
                     ItemController selectedIC = selectedItem.GetComponent<ItemController>();
+                    ItemController slotItemIC = slotChild.GetComponent<ItemController>();
                     // Stack Itens
                     if (isStackable(slotChild, selectedIC)) {
 
-                        selectedIC.IncreaseAmount(slotChild.GetComponent<ItemController>().item.amount);
+                        selectedIC.IncreaseAmount(slotItemIC.item.amount);
                         Destroy(slotChild.gameObject);
-                        //Debug.Log("Destroying");
+                        Debug.Log("Destroying");
                         // Swap Item 
                     } else {
+                       // Vector2 oldPos = selectedIC.coords;
+                        //Vector2 newPos = slotItemIC.coords;
+                       // Debug.Log("oldPos:" + oldPos);
+                        //Debug.Log("newPos:" + newPos);
+                        //selectedIC.coords = oldPos;
+                        //slotItemIC.coords = newPos;
+
                         // Change the parent of the item in the slot
                         slotChild.SetParent(originalSlot);
                         // Move the item to the previous location of the item you're holding
@@ -122,12 +141,12 @@ public class InventoryController : MonoBehaviour {
                 selectedItem.SetParent(selectedSlot);
             }
             selectedItem.localPosition = Vector3.zero;
-            selectedItem.GetComponent<Image>().raycastTarget = true;
+            //selectedItem.GetComponent<Image>().raycastTarget = true;
         }
     }
 
     /**
-    * 
+    * Define if an Item is dragable
     */
     private void SetDragableItens(bool b) {
         foreach (GameObject item in GameObject.FindGameObjectsWithTag("Item")) {
@@ -135,9 +154,12 @@ public class InventoryController : MonoBehaviour {
         }
     }
 
+    /**
+    * Define if an Item is stackable
+    */
     private bool isStackable(Transform slotChild, ItemController selectedIC) {
-        return selectedItem.name == slotChild.name 
+        return selectedItem.name == slotChild.name
                && !selectedIC.item.Equals(slotChild.GetComponent<ItemController>().item) &&
-               (selectedIC.item.type == ItemType.USABLE || selectedIC.item.type == ItemType.MISCELLANEOUS);
+               (selectedIC.item.type == ItemType.USABLE /*|| selectedIC.item.type == ItemType.MISCELLANEOUS*/);
     }
 }

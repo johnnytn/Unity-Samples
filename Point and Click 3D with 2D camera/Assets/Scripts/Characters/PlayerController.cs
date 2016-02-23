@@ -20,12 +20,17 @@ public class PlayerController : MonoBehaviour {
 	}
 
     private void ToggleInventory() {
-        inventory.SetActive(!inventory.activeInHierarchy);
-        inventory.GetComponent<InventoryController>().CreateAndRecreatetInvetory();
-        Time.timeScale = !inventory.activeInHierarchy ? 1 : 0;
-        DisablePlayer(!inventory.activeInHierarchy);
+        bool isActive = inventory.activeInHierarchy;
+        inventory.SetActive(!isActive);
+        if (!isActive) {
+            inventory.GetComponent<InventoryController>().CreateAndRecreatetInvetory();
+        } else {
+            inventory.GetComponent<InventoryController>().ClearSlots();
+        }
+        DisablePlayer(!isActive);
     }
     private void DisablePlayer(bool flag) {
+        Time.timeScale = flag ? 1 : 0;
         player.GetComponent<Player>().enabled = flag;
     }
 

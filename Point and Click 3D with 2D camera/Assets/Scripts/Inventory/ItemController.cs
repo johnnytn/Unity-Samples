@@ -8,6 +8,7 @@ public class ItemController : MonoBehaviour {
 
     public Item item;
     public Sprite sprite;
+    public Vector2 coords;
 
     /**
     * Set the references of the slot into the InventoryController using an Event Trigger
@@ -19,6 +20,8 @@ public class ItemController : MonoBehaviour {
             invControl.selectedItem = trans;
         }
     }
+
+    
 
     public void IncreaseAmount(int amount) {
         item.amount += amount;

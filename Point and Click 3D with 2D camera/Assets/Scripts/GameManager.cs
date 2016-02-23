@@ -36,7 +36,6 @@ public class GameManager : Util {
     // Update is called once per frame
     void Update() {
         CloseInspectors();
-
     }
 
     /**
@@ -77,6 +76,7 @@ public class GameManager : Util {
         ItemController ic = gameObject.AddComponent<ItemController>();
         ic.item = item;
         ic.sprite = sprites[0];
+        ic.coords = new Vector2(1,1);
         allItens.Add(ic);
 
         // Item
@@ -84,6 +84,7 @@ public class GameManager : Util {
         ItemController ic1 = gameObject.AddComponent<ItemController>();
         ic1.item = item1;
         ic1.sprite = sprites[1];
+        ic1.coords = new Vector2(2, 1);
         allItens.Add(ic1);
 
         // Item
@@ -91,6 +92,7 @@ public class GameManager : Util {
         ItemController ic2 = gameObject.AddComponent<ItemController>();
         ic2.item = item2;
         ic2.sprite = sprites[2];
+        ic2.coords = new Vector2(3, 1);
         allItens.Add(ic2);
 
         // Item
@@ -98,6 +100,7 @@ public class GameManager : Util {
         ItemController ic3 = gameObject.AddComponent<ItemController>();
         ic3.item = item3;
         ic3.sprite = sprites[1];
+        ic3.coords = new Vector2(4, 1);
         allItens.Add(ic3);
 
         SortAllItens();
