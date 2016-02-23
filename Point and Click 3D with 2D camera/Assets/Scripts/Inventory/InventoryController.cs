@@ -26,10 +26,11 @@ public class InventoryController : MonoBehaviour {
      */
     void Update() {
         if (selectedItem != null) {
+            // Click Down
             if (Input.GetMouseButtonDown(0)) {
                 canDragItem = true;
                 originalSlot = selectedItem.parent;
-                selectedItem.GetComponent<Image>().raycastTarget = false;
+                //selectedItem.GetComponent<Image>().raycastTarget = false;
                 SetDragableItens(false);
             }
             DragItem();
@@ -40,12 +41,13 @@ public class InventoryController : MonoBehaviour {
      * Create and Recreate(if sorted) the Inventory
      */
     public void CreateAndRecreatetInvetory() {
-
         if (this.transform.childCount < 1) {
             CreateInvetory();
         } else {
             foreach (Transform t in this.transform) {
-                Destroy(t.gameObject);
+                if (!t.tag.Equals("UI")) {
+                    Destroy(t.gameObject);
+                }
             }
             CreateInvetory();
         }
@@ -61,19 +63,21 @@ public class InventoryController : MonoBehaviour {
                 GameObject slot = Instantiate(slotPrefab) as GameObject;
                 slot.transform.SetParent(this.transform);
                 slot.name = "slot_" + x + "_" + y;
+                // Attach a slot to the anchor
                 slot.GetComponent<RectTransform>().anchoredPosition = new Vector3(windowSize.x / (invetorySize.x + 1) * x,
                                                                                   windowSize.y / (invetorySize.y + 1) * -y, 0);
-                if (x + (y - 1) * 4 <= GameDB.sortedItens.Count) {
+                int pos = x + (y - 1) * 4;
+                if (pos <= GameManager.gm.sortedItens.Count) {
                     GameObject item = Instantiate(itemPrefab) as GameObject;
                     item.transform.SetParent(slot.transform);
                     item.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
                     ItemController i = item.GetComponent<ItemController>();
 
                     // Item component
-                    i.item.name = GameDB.sortedItens[(x + (y - 1) * 4) - 1].item.name;
-                    i.item.type = GameDB.sortedItens[(x + (y - 1) * 4) - 1].item.type;
-                    i.item.description = GameDB.sortedItens[(x + (y - 1) * 4) - 1].item.description;
-                    i.sprite = GameDB.sortedItens[(x + (y - 1) * 4) - 1].sprite;
+                    i.item.name = GameManager.gm.sortedItens[pos - 1].item.name;
+                    i.item.type = GameManager.gm.sortedItens[pos - 1].item.type;
+                    i.item.description = GameManager.gm.sortedItens[pos - 1].item.description;
+                    i.sprite = GameManager.gm.sortedItens[pos - 1].sprite;
 
                     item.name = i.item.name;
                     item.GetComponent<Image>().sprite = i.sprite;
@@ -85,11 +89,11 @@ public class InventoryController : MonoBehaviour {
     * Drag an Item to a Slot, if there is an other Item, exchange places    
     */
     private void DragItem() {
+        // Click Drag 
         if (Input.GetMouseButton(0) && canDragItem) {
             selectedItem.position = Input.mousePosition;
 
-            // CLICK RELEASE     
-
+            // Click Release 
         } else if (Input.GetMouseButtonUp(0)) {
             canDragItem = false;
             SetDragableItens(true);
@@ -98,10 +102,22 @@ public class InventoryController : MonoBehaviour {
                 selectedItem.SetParent(originalSlot);
             } else {
                 if (selectedSlot.childCount > 0) {
-                    // Change the parent of the item in the slot
-                    selectedSlot.GetChild(0).SetParent(originalSlot);
-                    // Move the item to the previous location of the item you're holding
-                    originalSlot.GetChild(1).localPosition = Vector3.zero;
+                    Transform slotChild = selectedSlot.GetChild(0);
+                    ItemController selectedIC = selectedItem.GetComponent<ItemController>();
+                    // Stack Itens
+                    if (isStackable(slotChild, selectedIC)) {
+
+                        selectedIC.IncreaseAmount(slotChild.GetComponent<ItemController>().item.amount);
+                        Destroy(slotChild.gameObject);
+                        //Debug.Log("Destroying");
+                        // Swap Item 
+                    } else {
+                        // Change the parent of the item in the slot
+                        slotChild.SetParent(originalSlot);
+                        // Move the item to the previous location of the item you're holding
+                        originalSlot.GetChild(0).localPosition = Vector3.zero;
+
+                    }
                 }
                 selectedItem.SetParent(selectedSlot);
             }
@@ -117,5 +133,11 @@ public class InventoryController : MonoBehaviour {
         foreach (GameObject item in GameObject.FindGameObjectsWithTag("Item")) {
             item.GetComponent<ItemController>().canDragItem = b;
         }
+    }
+
+    private bool isStackable(Transform slotChild, ItemController selectedIC) {
+        return selectedItem.name == slotChild.name 
+               && !selectedIC.item.Equals(slotChild.GetComponent<ItemController>().item) &&
+               (selectedIC.item.type == ItemType.USABLE || selectedIC.item.type == ItemType.MISCELLANEOUS);
     }
 }

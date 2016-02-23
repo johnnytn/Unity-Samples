@@ -4,18 +4,31 @@ using System.Collections.Generic;
 public class Collector : Interactables {
 
     public Item item;
+    public Sprite sprite;
+    public bool canDragItem;
 
     /**
      * Collect an Item and add to the Player Inventory
      */
     public override void Interact() {
-        Debug.Log("Adding item");
-        List<Item> itens = GameManager.gm.player.itensHeld;
-        if (itens == null) {
-            itens = new List<Item>();
-        }
+        GameManager gm = GameManager.gm;
+        List<Item> itens = gm.player.itensHeld;
+        itens = new List<Item>();
+        ItemController ic = createItemController();
         itens.Add(item);
-        GameManager.gm.invDisp.UpdateDisplay();
+        gm.AddItem(ic);
+        GameObject.Destroy(this.gameObject, 0.1f);
+
+        // Display Item name in UI
+        gm.invDisp.UpdateDisplay();
+    }
+
+    private ItemController createItemController() {
+        ItemController ic = gameObject.AddComponent<ItemController>();
+        ic.item = this.item;
+        ic.sprite = this.sprite;
+        ic.canDragItem = this.canDragItem;
+        return ic;
     }
 
 }

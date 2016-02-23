@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
+[System.Serializable]
 public class ItemController : MonoBehaviour {
 
     public bool canDragItem;
-
 
     public Item item;
     public Sprite sprite;
@@ -18,6 +18,12 @@ public class ItemController : MonoBehaviour {
             Transform trans = (mouseOver || invControl.canDragItem) ? this.transform : null;
             invControl.selectedItem = trans;
         }
+    }
+
+    public void IncreaseAmount(int amount) {
+        item.amount += amount;
+        transform.Find("Amount").GetComponent<Text>().text = item.amount.ToString();
+
     }
 
 }
