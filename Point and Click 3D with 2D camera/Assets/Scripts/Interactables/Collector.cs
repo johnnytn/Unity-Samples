@@ -16,8 +16,8 @@ public class Collector : Interactables {
         itens = new List<Item>();
         ItemController ic = createItemController();
         itens.Add(item);
-        gm.inventory.GetComponent<InventoryController>().AddItem(ic);
-        gm.inventory.GetComponent<InventoryController>().CreateAndRecreatetInvetory();
+        gm.invControl.AddItem(ic);
+        gm.invControl.CreateAndRecreatetInvetory();
 
         // Display Item name in UI
         gm.invDisp.UpdateDisplay();
@@ -29,7 +29,7 @@ public class Collector : Interactables {
         ic.item = this.item;
         ic.sprite = this.sprite;
         ic.canDragItem = this.canDragItem;
-        ic.coords = GameManager.gm.inventory.GetComponent<InventoryController>().getEmptySlotPos();
+        ic.coords = GameManager.gm.invControl.getEmptySlotPos();
 
         return ic;
     }

@@ -71,6 +71,9 @@ MonoBehaviour:
   col: {fileID: 0}
   reachableNodes: []
   loc: {fileID: 0}
+  outlinedMaterial: {fileID: 0}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

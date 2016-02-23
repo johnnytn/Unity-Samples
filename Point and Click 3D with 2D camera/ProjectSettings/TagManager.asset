@@ -5,9 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Item
-  - Loot
   - UI
   - Slot
+  - Location
+  - Inventory Display
+  - IV Canvas
+  - Observer Cam
+  - Inventory
   layers:
   - Default
   - TransparentFX
