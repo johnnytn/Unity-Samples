@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,10 +18,9 @@ public class InventoryController : MonoBehaviour {
     public float slotSize;
     public Vector2 windowSize;
 
-    // Use this for initialization
-    void Awake() {
-//        CreateSlots();
-    }
+    private List<ItemController> allItens = new List<ItemController>();
+    private List<ItemController> sortedItens = new List<ItemController>();
+    public Sprite[] sprites;
 
     /**
      * Update is called once per frame
@@ -31,10 +31,70 @@ public class InventoryController : MonoBehaviour {
             if (Input.GetMouseButtonDown(0)) {
                 canDragItem = true;
                 originalSlot = selectedItem.parent;
-                //selectedItem.GetComponent<Image>().raycastTarget = false;
                 SetDragableItens(false);
             }
             DragItem();
+        }
+    }
+
+    /**
+    * Prepare the Item list, creating Itens and populating a List
+    */
+    private void PrepareItens() {
+        // Item
+        Item item = new Item("Sword", "sharp weapon", ItemType.EQUIPMENT, 1);
+        ItemController ic = CreateItem(item, 0, new Vector2(1, 1));
+        ic.item = item;
+        ic.sprite = sprites[0];
+        ic.coords = new Vector2(1, 1);
+        allItens.Add(ic);
+
+        // Item
+        Item item1 = new Item("Health Potion", "Heal your wounds", ItemType.USABLE, 1);
+        ItemController ic1 = CreateItem(item1, 1, new Vector2(2, 1));
+        allItens.Add(ic1);
+
+        // Item
+        Item item2 = new Item("Scraps", "Scraps Scraps", ItemType.MISCELLANEOUS, 1);
+        ItemController ic2 = CreateItem(item2, 2, new Vector2(3, 1));
+        allItens.Add(ic2);
+
+        // Item
+        Item item3 = new Item("Health Potion", "Heal your wounds", ItemType.USABLE, 1);
+        ItemController ic3 = CreateItem(item3, 1, new Vector2(4, 1));
+        allItens.Add(ic3);
+
+        SortAllItens();
+    }
+
+    /**
+    * Creating an ItemController
+    */
+    private ItemController CreateItem(Item item, int spritePos, Vector2 slotPos) {
+        ItemController ic = gameObject.AddComponent<ItemController>();
+        ic.item = item;
+        ic.sprite = sprites[spritePos];
+        ic.coords = slotPos;
+        return ic;
+    }
+
+    /**
+    * Add all Itens to the list
+    */
+    public void SortAllItens() {
+        sortedItens.Clear();
+        sortedItens.AddRange(allItens);
+    }
+
+    /**
+    * Sort Itens by Type
+    */
+    public void SortItensByType(string type) {
+        sortedItens.Clear();
+        foreach (ItemController i in allItens) {
+            if (i.item.type.ToString() == type) {
+                sortedItens.Add(i);
+            }
         }
     }
 
@@ -87,8 +147,8 @@ public class InventoryController : MonoBehaviour {
     * Create the invetory Itens
     */
     private void CreateInvetory() {
-        for (int n = 0; n < GameManager.gm.sortedItens.Count; n++) {
-            ItemController iData = GameManager.gm.sortedItens[n];
+        for (int n = 0; n < sortedItens.Count; n++) {
+            ItemController iData = sortedItens[n];
             Vector2 coords = iData.coords;
             if (coords != Vector2.zero) {
                 GameObject item = Instantiate(itemPrefab) as GameObject;
@@ -122,7 +182,6 @@ public class InventoryController : MonoBehaviour {
         } else if (Input.GetMouseButtonUp(0)) {
             canDragItem = false;
             SetDragableItens(true);
-            Debug.Log("aqui");
 
             if (selectedSlot == null) {
                 selectedItem.SetParent(originalSlot);
@@ -137,19 +196,15 @@ public class InventoryController : MonoBehaviour {
                         Destroy(slotChild.gameObject);
                         // Swap Item 
                     } else {
-
-                        //ChangeCoordinates(selectedIC, slotItemIC);
                         // Change the parent of the item in the slot
                         slotChild.SetParent(originalSlot);
                         // Move the item to the previous location of the item you're holding
                         originalSlot.GetChild(0).localPosition = Vector3.zero;
-
                     }
                 }
                 selectedItem.SetParent(selectedSlot);
             }
             selectedItem.localPosition = Vector3.zero;
-            //selectedItem.GetComponent<Image>().raycastTarget = true;
         }
     }
 
@@ -163,6 +218,45 @@ public class InventoryController : MonoBehaviour {
         //slotItemIC.coords = newPos;
         //GameManager.gm.allItens
         throw new NotImplementedException();
+    }
+
+    public void PrepareInventory() {
+        CreateSlots();
+        PrepareItens();
+        CreateAndRecreatetInvetory();
+    }
+
+    /**
+     * Add an Item to the list
+     */
+    public void AddItem(ItemController ic) {
+        allItens.Add(ic);
+        SortAllItens();
+    }
+
+    /**
+    * Get the position of the next empty slot
+    */
+    public Vector2 getEmptySlotPos() {
+        int xPos = 1;
+        int yPos = 1;
+        bool isCoordsSet = false;
+        Vector2 coords = new Vector2(xPos, yPos);
+
+        for (int y = 1; y <= invetorySize.y; y++) {
+            for (int x = 1; x <= invetorySize.x; x++) {
+                Transform slot = transform.Find("slot_" + x + "_" + y);
+                SlotController sc = slot.GetComponent<SlotController>();
+
+                if (sc.isEmpty && !isCoordsSet) {
+                    coords = sc.coords;
+                    isCoordsSet = true;
+                    sc.isEmpty = false;
+                    break;
+                }
+            }
+        }
+        return coords;
     }
 
     /**
@@ -182,5 +276,5 @@ public class InventoryController : MonoBehaviour {
                && !selectedIC.item.Equals(slotChild.GetComponent<ItemController>().item) &&
                (selectedIC.item.type == ItemType.USABLE || selectedIC.item.type == ItemType.MISCELLANEOUS);
     }
-       
+
 }
