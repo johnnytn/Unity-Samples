@@ -1,3 +1,3 @@
 ﻿public enum PersistenceType {
-    ITEM, PLAYER, NODE
+    itens, player, node
 };
