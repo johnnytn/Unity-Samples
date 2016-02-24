@@ -19,7 +19,7 @@ public class InventoryController : MonoBehaviour {
     public Vector2 windowSize;
 
     private List<ItemController> allItens = new List<ItemController>();
-    private List<ItemController> sortedItens = new List<ItemController>();
+    public List<ItemController> sortedItens = new List<ItemController>();
     public Sprite[] sprites;
 
     /**
@@ -42,25 +42,22 @@ public class InventoryController : MonoBehaviour {
     */
     private void PrepareItens() {
         // Item
-        Item item = new Item("Sword", "sharp weapon", ItemType.EQUIPMENT, 1);
+        Item item = new Item(1, "Sword", "sharp weapon", ItemType.EQUIPMENT, 1, 0, new int[] { 1, 1 });
         ItemController ic = CreateItem(item, 0, new Vector2(1, 1));
-        ic.item = item;
-        ic.sprite = sprites[0];
-        ic.coords = new Vector2(1, 1);
         allItens.Add(ic);
 
         // Item
-        Item item1 = new Item("Health Potion", "Heal your wounds", ItemType.USABLE, 1);
+        Item item1 = new Item(2, "Health Potion", "Heal your wounds", ItemType.USABLE, 1, 1, new int[] { 2, 1 });
         ItemController ic1 = CreateItem(item1, 1, new Vector2(2, 1));
         allItens.Add(ic1);
 
         // Item
-        Item item2 = new Item("Scraps", "Scraps Scraps", ItemType.MISCELLANEOUS, 1);
+        Item item2 = new Item(3, "Scraps", "Scraps Scraps", ItemType.MISCELLANEOUS, 1, 2, new int[] { 3, 1 });
         ItemController ic2 = CreateItem(item2, 2, new Vector2(3, 1));
         allItens.Add(ic2);
 
         // Item
-        Item item3 = new Item("Health Potion", "Heal your wounds", ItemType.USABLE, 1);
+        Item item3 = new Item(4, "Health Potion", "Heal your wounds", ItemType.USABLE, 1, 1, new int[] { 4, 1 });
         ItemController ic3 = CreateItem(item3, 1, new Vector2(4, 1));
         allItens.Add(ic3);
 
@@ -73,8 +70,6 @@ public class InventoryController : MonoBehaviour {
     private ItemController CreateItem(Item item, int spritePos, Vector2 slotPos) {
         ItemController ic = gameObject.AddComponent<ItemController>();
         ic.item = item;
-        ic.sprite = sprites[spritePos];
-        ic.coords = slotPos;
         return ic;
     }
 
@@ -149,11 +144,11 @@ public class InventoryController : MonoBehaviour {
     private void CreateInvetory() {
         for (int n = 0; n < sortedItens.Count; n++) {
             ItemController iData = sortedItens[n];
-            Vector2 coords = iData.coords;
+            Vector2 coords = new Vector2(iData.item.coords[0], iData.item.coords[1]);
             if (coords != Vector2.zero) {
                 GameObject item = Instantiate(itemPrefab) as GameObject;
                 item.name = iData.item.name;
-                item.GetComponent<Image>().sprite = iData.sprite;
+                item.GetComponent<Image>().sprite = sprites[iData.item.spritePos];
                 Transform slot = transform.Find("slot_" + coords.x + "_" + coords.y);
                 item.transform.SetParent(slot);
                 slot.GetComponent<SlotController>().isEmpty = false;
@@ -163,8 +158,9 @@ public class InventoryController : MonoBehaviour {
                 // Item component
                 ItemController i = item.GetComponent<ItemController>();
                 i.item = iData.item;
-                i.sprite = iData.sprite;
-                i.coords = iData.coords;
+                i.item.spritePos = iData.item.spritePos;
+                i.item.coords = iData.item.coords;
+
                 i.canDragItem = true;
             }
         }

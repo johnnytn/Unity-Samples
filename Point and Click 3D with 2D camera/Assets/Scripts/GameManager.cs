@@ -15,6 +15,7 @@ public class GameManager : Util {
     public ObsCamera obsCamera;
     public Loading load;
     public InventoryController invControl;
+    public GameObject settings;
     // Cursor Icon
     public Texture2D cursorTexture;
 

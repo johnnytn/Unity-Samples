@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
 public class ItemController : MonoBehaviour {
 
     public bool canDragItem;
-
     public Item item;
-    public Sprite sprite;
-    public Vector2 coords;
+   // public Sprite sprite;
+   // public Vector2 coords;
 
     /**
     * Set the references of the slot into the InventoryController using an Event Trigger

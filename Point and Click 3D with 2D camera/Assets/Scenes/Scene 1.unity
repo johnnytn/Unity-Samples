@@ -598,6 +598,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 196135151}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &202778761 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 137684, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+  m_PrefabInternal: {fileID: 344454932}
+--- !u!114 &202778762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 202778761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 250cd6cced3f3654a97f51895606c8cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &204504432
 Prefab:
   m_ObjectHideFlags: 0
@@ -722,11 +737,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
+    id: 5
     name: Key
     description: Open things
     type: 2
     amount: 1
-  sprite: {fileID: 21300104, guid: 5d9ba96cd9188d44dbac89447dd451b3, type: 3}
+    spritePos: 0
+    coords: 
+  spritePos: 3
   canDragItem: 0
 --- !u!65 &204504437
 BoxCollider:
@@ -836,6 +854,14 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11431806, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: sprites.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493526, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 475878, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -868,6 +894,59 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 22445566, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 22475958, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493526, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493526, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493526, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1214131519}
+    - target: {fileID: 11493526, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493526, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 11489306, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 202778762}
+    - target: {fileID: 11489306, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Save
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454396, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 202778762}
+    - target: {fileID: 11454396, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Load
+      objectReference: {fileID: 0}
+    - target: {fileID: 137684, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11431806, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
+      propertyPath: sprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300104, guid: 5d9ba96cd9188d44dbac89447dd451b3,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
   m_IsPrefabParent: 0
@@ -2336,11 +2415,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
+    id: 6
     name: Key
     description: Open things
     type: 2
     amount: 1
-  sprite: {fileID: 21300104, guid: 5d9ba96cd9188d44dbac89447dd451b3, type: 3}
+    spritePos: 0
+    coords: 
+  spritePos: 3
   canDragItem: 0
 --- !u!65 &934288151
 BoxCollider:
@@ -2903,6 +2985,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1190620707}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1214131519 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11429578, guid: 1abaf82cc91997749b46eda93ddd46b6,
+    type: 2}
+  m_PrefabInternal: {fileID: 344454932}
+  m_Script: {fileID: 11500000, guid: fc84fee1d2aff7249aac2e3af392e69a, type: 3}
 --- !u!4 &1282034077
 Transform:
   m_ObjectHideFlags: 0
@@ -4509,11 +4597,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
+    id: 0
     name: 
     description: 
     type: 0
     amount: 0
-  sprite: {fileID: 0}
+    spritePos: 0
+    coords: 
+  spritePos: 0
   canDragItem: 0
 --- !u!65 &2000846721
 BoxCollider:

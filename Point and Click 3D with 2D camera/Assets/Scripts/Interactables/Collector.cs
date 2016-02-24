@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using LitJson;
 
 public class Collector : Interactables {
 
     public Item item;
-    public Sprite sprite;
+    public int spritePos;
     public bool canDragItem;
 
     /**
@@ -27,9 +28,10 @@ public class Collector : Interactables {
     private ItemController createItemController() {
         ItemController ic = gameObject.AddComponent<ItemController>();
         ic.item = this.item;
-        ic.sprite = this.sprite;
+        ic.item.spritePos = this.spritePos;
         ic.canDragItem = this.canDragItem;
-        ic.coords = GameManager.gm.invControl.getEmptySlotPos();
+        Vector2 coords = GameManager.gm.invControl.getEmptySlotPos();
+        ic.item.coords = new int[] { (int)coords.x, (int)coords.y };
 
         return ic;
     }
