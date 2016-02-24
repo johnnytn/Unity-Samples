@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 public class SettingsController : MonoBehaviour {
 
-
-    public void Save() {
-        string filePath = Application.persistentDataPath + "/playerInfo.json";
+    /**
+    * Create a PersistenceData with all game data
+    */
+    private PersistenceData CreatePersistenceData() {
         List<ItemController> itensC = GameManager.gm.invControl.sortedItens;
         List<Item> itens = new List<Item>();
         foreach (ItemController ic in itensC) {
@@ -13,18 +14,27 @@ public class SettingsController : MonoBehaviour {
         }
         PersistenceData data = new PersistenceData();
         data.itens = itens;
-        JsonPersistence.Save<PersistenceData>(data, filePath);
+
+        return data;
+    }
+
+    /**
+    * Save game data
+    */
+    public void Save() {
+        string filePath = Application.persistentDataPath + "/playerInfo.json";
+        JsonPersistence.Save<PersistenceData>(CreatePersistenceData(), filePath);
         Debug.Log("Data saved. ");
     }
 
+    /**
+    * Load game data
+    */
     public void Load() {
         string filePath = Application.persistentDataPath + "/playerInfo.json";
-        PersistenceData data = JsonPersistence.LoadPersistenceData(filePath);
-
+        PersistenceData data = JsonPersistence.ReadPersistenceData(filePath);
         List<ItemController> itensC = new List<ItemController>();
-        //List<Item> itens = new List<Item>();
 
-        Debug.Log("Count - 1 -"+data.itens.Count);
         foreach (Item i in data.itens) {
             ItemController ic = gameObject.AddComponent<ItemController>();
             ic.item = i;
@@ -39,8 +49,6 @@ public class SettingsController : MonoBehaviour {
         }
         GameManager.gm.invControl.sortedItens = itensC;
         GameManager.gm.invControl.CreateAndRecreatetInvetory();
-        //Debug.Log("Count - 2 -" + GameManager.gm.invControl.sortedItens.Count);
-
     }
 
 }

@@ -21,16 +21,18 @@ public class JsonPersistence {
         }
     }
 
+    /**
+   * Generic Load - read athe PersistenceData from the Json file
+   */
     public static T LoadObject<T>(string filename, PersistenceType type) where T : class {
 
         if (File.Exists(filename)) {
             try {
                 using (Stream stream = File.OpenRead(filename)) {
-                    //String jsonString = File.ReadAllText(filename);
-                    //JsonData jsonData = JsonMapper.ToObject(jsonString);
+                    String jsonString = File.ReadAllText(filename);
+                    JsonData jsonData = JsonMapper.ToObject(jsonString);
 
-                    T i = null;//GetPersitenceType<T>(jsonData, type) as T;
-                    return i as T;
+                    return jsonData["Item"] as T;
                 }
             } catch (Exception e) {
                 Debug.Log(e.Message);
@@ -39,7 +41,10 @@ public class JsonPersistence {
         return null;
     }
 
-    public static PersistenceData LoadPersistenceData(string filename) {
+    /**
+    * Read the PersistenceData from the Json file
+    */
+    public static PersistenceData ReadPersistenceData(string filename) {
 
         if (File.Exists(filename)) {
             try {
@@ -57,6 +62,9 @@ public class JsonPersistence {
         return null;
     }
 
+    /**
+    * Get the PersistenceData from the Json file
+    */
     private static PersistenceData GetPersitenceData(JsonData jsonData) {
         PersistenceData data = new PersistenceData();
         Player player = null;
