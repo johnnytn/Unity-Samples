@@ -34,6 +34,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &106336
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22481726}
+  m_Layer: 5
+  m_Name: Buttons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &109818
 GameObject:
   m_ObjectHideFlags: 1
@@ -253,13 +268,14 @@ GameObject:
   - 222: {fileID: 22228170}
   - 114: {fileID: 11476604}
   - 114: {fileID: 11464556}
+  - 114: {fileID: 11407580}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Inventory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &141660
 GameObject:
   m_ObjectHideFlags: 1
@@ -927,6 +943,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: LOADING...
+--- !u!114 &11407580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 250cd6cced3f3654a97f51895606c8cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11418970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1053,10 +1080,12 @@ MonoBehaviour:
   invetorySize: {x: 4, y: 3}
   slotSize: 50
   windowSize: {x: 300, y: 200}
+  sortedItens: []
   sprites:
   - {fileID: 21300036, guid: 5d9ba96cd9188d44dbac89447dd451b3, type: 3}
   - {fileID: 21300002, guid: 5d9ba96cd9188d44dbac89447dd451b3, type: 3}
   - {fileID: 21300034, guid: 5d9ba96cd9188d44dbac89447dd451b3, type: 3}
+  - {fileID: 21300104, guid: 5d9ba96cd9188d44dbac89447dd451b3, type: 3}
 --- !u!114 &11434006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1507,8 +1536,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11464556}
-        m_MethodName: SortAllItens
+      - m_Target: {fileID: 11407580}
+        m_MethodName: Load
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1599,6 +1628,7 @@ MonoBehaviour:
   invetorySize: {x: 4, y: 3}
   slotSize: 50
   windowSize: {x: 300, y: 200}
+  sortedItens: []
   sprites:
   - {fileID: 21300036, guid: 5d9ba96cd9188d44dbac89447dd451b3, type: 3}
   - {fileID: 21300002, guid: 5d9ba96cd9188d44dbac89447dd451b3, type: 3}
@@ -2010,8 +2040,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11464556}
-        m_MethodName: SortAllItens
+      - m_Target: {fileID: 11407580}
+        m_MethodName: Save
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2073,7 +2103,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11429610}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11429578}
+        m_MethodName: ToggleSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11493784
@@ -2340,14 +2381,14 @@ Canvas:
   m_GameObject: {fileID: 111980}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PlaneDistance: 10
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 654497283
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!223 &22375358
@@ -2480,14 +2521,14 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 166336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 22498506}
+  m_Father: {fileID: 22481726}
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 335, y: 107}
+  m_AnchoredPosition: {x: 0, y: -29.1}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22423620
@@ -2538,6 +2579,7 @@ RectTransform:
   m_Children:
   - {fileID: 22465676}
   - {fileID: 22487074}
+  - {fileID: 22481726}
   m_Father: {fileID: 22498506}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -2714,11 +2756,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 22498506}
-  m_RootOrder: 3
+  m_Father: {fileID: 22481726}
+  m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 335, y: 54.5}
+  m_AnchoredPosition: {x: -0, y: 23.3}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22451142
@@ -2821,7 +2863,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22498506}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: -10}
@@ -2844,6 +2886,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &22481726
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106336}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00000077982673}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 22445566}
+  - {fileID: 22421742}
+  m_Father: {fileID: 22424116}
+  m_RootOrder: 2
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 120}
+  m_Pivot: {x: 1, y: 1}
 --- !u!224 &22487074
 RectTransform:
   m_ObjectHideFlags: 1
@@ -2891,9 +2952,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 22424116}
-  - {fileID: 22421742}
   - {fileID: 22475958}
-  - {fileID: 22445566}
   m_Father: {fileID: 475878}
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
