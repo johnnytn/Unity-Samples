@@ -41,6 +41,7 @@ public class Menu : MonoBehaviour {
     */
     public void LoadLevel(int level) {        
         load.LoadingScene(level);
+		GameManager.gm.player.lastLevel = 1;
     }
 
     /** 

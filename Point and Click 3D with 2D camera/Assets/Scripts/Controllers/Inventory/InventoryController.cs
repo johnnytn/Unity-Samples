@@ -20,6 +20,7 @@ public class InventoryController : MonoBehaviour {
 
     private List<ItemController> allItens = new List<ItemController>();
     public List<ItemController> sortedItens = new List<ItemController>();
+	public List<Item> itens = new List<Item>();
     public Sprite[] sprites;
 
     /**
@@ -78,7 +79,11 @@ public class InventoryController : MonoBehaviour {
     */
     public void SortAllItens() {
         sortedItens.Clear();
-        sortedItens.AddRange(allItens);
+        //sortedItens.AddRange(allItens);
+		foreach (ItemController i in allItens) {
+			sortedItens.Add(i);
+			itens.Add(i.item);
+		}
     }
 
     /**

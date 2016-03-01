@@ -19,10 +19,6 @@ public class GameManager : Util {
     // Cursor Icon
     public Texture2D cursorTexture;
 
-    // public List<ItemController> allItens = new List<ItemController>();
-    //  public List<ItemController> sortedItens = new List<ItemController>();
-    // public Sprite[] sprites;
-
     void Awake() {
         PrepareGameManager();
     }

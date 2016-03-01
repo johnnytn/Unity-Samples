@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class InventoryDisplay : MonoBehaviour {
 
+	/**
+	 * Open the InventoryDisplay showing the name of a item picked 
+	 */
     public void UpdateDisplay() {
         this.gameObject.SetActive(true);
-        List<Item> itens = GameManager.gm.player.itensHeld;
-        string displayName = (itens != null && itens.Count > 0) ? itens[itens.Count - 1].name : "none";
+        Item item = GameManager.gm.player.itensHeld;
+		string displayName = (item != null ) ? item.name : "none";
         GetComponent<Text>().text = "Obtained: " + displayName;
         StartCoroutine(wait());
     }

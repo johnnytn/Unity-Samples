@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class Player : Character {
 
-    public List<Item> itensHeld = null;
+    public Item itensHeld = null;
+	public int lastLevel;
 
     void OnTriggerEnter(Collider col) {
         //SceneManager.LoadScene(1);
