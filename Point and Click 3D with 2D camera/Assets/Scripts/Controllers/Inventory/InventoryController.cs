@@ -18,8 +18,8 @@ public class InventoryController : MonoBehaviour {
     public float slotSize;
     public Vector2 windowSize;
 
-    private List<ItemController> allItens = new List<ItemController>();
-    public List<ItemController> sortedItens = new List<ItemController>();
+    public List<ItemController> allItens = new List<ItemController>();
+    private List<ItemController> sortedItens = new List<ItemController>();
 	public List<Item> itens = new List<Item>();
     public Sprite[] sprites;
 
@@ -79,8 +79,9 @@ public class InventoryController : MonoBehaviour {
     */
     public void SortAllItens() {
         sortedItens.Clear();
+        itens.Clear();
         //sortedItens.AddRange(allItens);
-		foreach (ItemController i in allItens) {
+        foreach (ItemController i in allItens) {
 			sortedItens.Add(i);
 			itens.Add(i.item);
 		}
@@ -102,6 +103,7 @@ public class InventoryController : MonoBehaviour {
      * Create and Recreate(if sorted) the Inventory
      */
     public void CreateAndRecreatetInvetory() {
+        SortAllItens();
         if (this.transform.childCount < 1) {
             CreateInvetory();
         } else {
@@ -168,7 +170,7 @@ public class InventoryController : MonoBehaviour {
 
                 i.canDragItem = true;
             }
-        }
+        }        
     }
 
     /**

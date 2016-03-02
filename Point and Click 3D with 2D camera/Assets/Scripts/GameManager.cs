@@ -16,8 +16,11 @@ public class GameManager : Util {
     public Loading load;
     public InventoryController invControl;
     public GameObject settings;
+   
     // Cursor Icon
-    public Texture2D cursorTexture;
+    public Texture2D interactCursor;
+    public Texture2D moveCursor;
+    
 
     void Awake() {
         PrepareGameManager();
@@ -68,62 +71,7 @@ public class GameManager : Util {
         DontDestroyOnLoad(gameObject);
         getStartingLocation();
         getPlayer();
-        invControl.PrepareInventory();
-    }
-
-    /**
-    * Get Player
-    */
-    private void getPlayer() {
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Player")) {
-            player = obj.GetComponent<Player>();
-        }
-    }
-
-    /**
-    * Get the Starting Node location
-    */
-    private void getStartingLocation() {
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Location")) {
-            if (obj.GetComponent<Location>().startingNode) {
-                startingNode = obj.GetComponent<Location>();
-            }
-        }
-    }
-    /**
-   * Get the Inventory Display
-   */
-    private void getInventoryDisplay() {
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Inventory Display")) {
-            invDisp = obj.GetComponent<InventoryDisplay>();
-        }
-    }
-
-    /**
-   * Get the IV Canvas
-   */
-    private void getIVCanvas() {
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("IV Canvas")) {
-            ivCanvas = obj.GetComponent<IVCanvas>();
-        }
-    }
-
-    /**
-    * Get the Observer Cam
-    */
-    private void getObserverCam() {
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Observer Cam")) {
-            obsCamera = obj.GetComponent<ObsCamera>();
-        }
-    }
-
-    /**
-    * Get Inventory
-    */
-    private void getInventory() {
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Inventory")) {
-            invControl = obj.GetComponent<InventoryController>();
-        }
+        invControl.PrepareInventory();        
     }
 
     public void ActiveDeactiveGameObjects(bool active) {

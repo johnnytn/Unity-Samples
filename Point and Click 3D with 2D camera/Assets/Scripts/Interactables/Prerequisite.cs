@@ -19,16 +19,17 @@ public class Prerequisite : MonoBehaviour {
             if (!requireItem) {
                 return watchSwitcher.state;
 
-            } else {                
-				/*bool isComplete = false;
+            } else {
+                bool isComplete = false;
 				foreach(Item ic in GameManager.gm.invControl.itens){
-					isComplete = ic.item.Equals(checkCollector.item);
+					isComplete = ic.name.Equals(checkCollector.item.name);
 					if(isComplete){
 						break;
 					}
 				}
-				return isComplete;*/
-				return GameManager.gm.invControl.itens.Contains(checkCollector.item);
+				return isComplete;
+                
+                 // return GameManager.gm.invControl.itens.Contains(checkCollector.item);
             }
 
         }

@@ -7,7 +7,7 @@ public class SettingsController : MonoBehaviour {
     * Create a PersistenceData with all game data
     */
     private PersistenceData CreatePersistenceData() {
-        List<ItemController> itensC = GameManager.gm.invControl.sortedItens;
+        List<ItemController> itensC = GameManager.gm.invControl.allItens;
         List<Item> itens = new List<Item>();
         foreach (ItemController ic in itensC) {
             itens.Add(ic.item);
@@ -47,7 +47,7 @@ public class SettingsController : MonoBehaviour {
                 i.type + " - " +
                 i.coords[0] + " - -" + i.coords[1]);
         }
-        GameManager.gm.invControl.sortedItens = itensC;
+        GameManager.gm.invControl.allItens = itensC;
         GameManager.gm.invControl.CreateAndRecreatetInvetory();
     }
 

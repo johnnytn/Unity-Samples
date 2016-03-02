@@ -23,8 +23,7 @@ public class Prop : Node {
     }
 
     void OnMouseEnter() {
-        // Change the cursor icon
-        Cursor.SetCursor(GameManager.gm.cursorTexture, hotSpot, cursorMode);
+        changeMouseIcon();
         //changeMaterial();
     }
 
@@ -33,6 +32,15 @@ public class Prop : Node {
         Cursor.SetCursor(null, Vector2.zero, cursorMode);
         // Restore the last material
        // childMesh.material = previousMaterial;
+    }
+
+    private void changeMouseIcon() {
+        if (inter.enabled) {
+            // Change the cursor icon
+            Cursor.SetCursor(GameManager.gm.interactCursor, hotSpot, cursorMode);
+        } else {
+            Cursor.SetCursor(GameManager.gm.moveCursor, hotSpot, cursorMode);
+        }
     }
 
     /** 
@@ -53,6 +61,7 @@ public class Prop : Node {
             }
             col.enabled = true;
             inter.enabled = true;
+            changeMouseIcon();
         }
     }
 
