@@ -27,8 +27,7 @@ public class Prerequisite : MonoBehaviour {
 						break;
 					}
 				}
-				return isComplete;
-                
+				return isComplete;                
                  // return GameManager.gm.invControl.itens.Contains(checkCollector.item);
             }
 

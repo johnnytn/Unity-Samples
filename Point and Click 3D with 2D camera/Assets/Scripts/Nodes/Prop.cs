@@ -10,7 +10,7 @@ public class Prop : Node {
     MeshRenderer childMesh;
     Color previousColor;
     public Material outlinedMaterial;
-    Material previousMaterial;
+    //Material previousMaterial;
 
     // Cursor variables
     //public Texture2D cursorTexture;
@@ -81,7 +81,7 @@ public class Prop : Node {
     private void changeMaterial() {
         childMesh = this.GetComponentInChildren<MeshRenderer>();
         previousColor = childMesh.material.color;
-        previousMaterial = childMesh.material;
+        //previousMaterial = childMesh.material;
 
         childMesh.material = outlinedMaterial;
         childMesh.material.color = previousColor;

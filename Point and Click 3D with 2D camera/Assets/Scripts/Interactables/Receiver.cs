@@ -13,18 +13,12 @@ public class Receiver : Interactables {
     public Transform projectile;
     private Transform myTransform;
 
-    public override void Interact() {
-        // Make this object interactable if prerequisite is met
-        //  if (inter != null) {
+    public override void Interact() {        
         Prerequisite pre = GetComponent<Prerequisite>();
         if (pre && !pre.Complete) {
-            return;
-            //   }
-            //   col.enabled = true;
-            //   inter.enabled = true;
+            return;            
         }
-
-        //GameManager.gm.invControl.itens.Contains();
+        
         if (Input.GetMouseButtonDown(0) && target != null) {
             Vector3 position = GameManager.gm.player.transform.position;
             projectile = Instantiate(projectile, new Vector3(position.x, position.y, 0), Quaternion.identity) as Transform;
