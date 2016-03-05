@@ -41,7 +41,7 @@ public class InventoryController : MonoBehaviour {
     /**
     * Prepare the Item list, creating Itens and populating a List
     */
-    private void PrepareItens() {
+    private void PrepareTestItens() {
         // Item
         Item item = new Item(1, "Sword", "sharp weapon", ItemType.EQUIPMENT, 1, 0, new int[] { 1, 1 });
         ItemController ic = CreateItem(item, 0, new Vector2(1, 1));
@@ -97,6 +97,12 @@ public class InventoryController : MonoBehaviour {
                 sortedItens.Add(i);
             }
         }
+    }
+
+    public void PrepareInventory() {
+        CreateSlots();
+        //PrepareTestItens();
+        CreateAndRecreatetInvetory();
     }
 
     /**
@@ -221,12 +227,6 @@ public class InventoryController : MonoBehaviour {
         //slotItemIC.coords = newPos;
         //GameManager.gm.allItens
         throw new NotImplementedException();
-    }
-
-    public void PrepareInventory() {
-        CreateSlots();
-        PrepareItens();
-        CreateAndRecreatetInvetory();
     }
 
     /**

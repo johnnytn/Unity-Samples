@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class GameManager : Util {
@@ -20,15 +21,14 @@ public class GameManager : Util {
     // Cursor Icon
     public Texture2D interactCursor;
     public Texture2D moveCursor;
-    
 
-    void Awake() {
+    public int currentLevel = 0;
+
+    public void AwakeGM(int level) {
+        currentLevel = level;
         PrepareGameManager();
-    }
-
-    void Start() {
-        startingNode.Arrive();
-    }
+        LoadData();
+    }    
 
     // Update is called once per frame
     void Update() {
@@ -36,10 +36,14 @@ public class GameManager : Util {
     }
 
     void OnLevelWasLoaded(int level) {
-        getStartingLocation();
-        getPlayer();
-        startingNode.Arrive();
-        Debug.Log("preparando");
+        try {
+            getStartingLocation();
+            getPlayer();
+            gm.startingNode.Arrive();
+        } catch (Exception e) {
+            Debug.Log(e.Message);
+        }
+        
     }
 
     /**
@@ -59,6 +63,27 @@ public class GameManager : Util {
         }
     }
 
+
+    /**
+    * Load the Player Data before the game starts
+    */
+    public void LoadData() {
+        PersistenceData data = JsonPersistence.ReadPersistenceData();
+        List<ItemController> itensC = new List<ItemController>();
+        Debug.Log(GameManager.gm.currentLevel);
+        Debug.Log(gm.currentLevel);
+
+        if (data != null && gm.currentLevel > 0) {
+            foreach (Item i in data.itens) {
+                ItemController ic = gameObject.AddComponent<ItemController>();
+                ic.item = i;
+                itensC.Add(ic);            
+            }
+        }
+        invControl.allItens = itensC;
+        invControl.PrepareInventory();
+    }
+
     /**
     * Prepare GM before the game starts
     */
@@ -70,8 +95,7 @@ public class GameManager : Util {
         }
         DontDestroyOnLoad(gameObject);
         getStartingLocation();
-        getPlayer();
-        invControl.PrepareInventory();        
+        getPlayer();           
     }
 
     public void ActiveDeactiveGameObjects(bool active) {

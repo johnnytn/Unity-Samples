@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-[System.Serializable]
+//[System.Serializable]
 public class Player : Character {
 
-    public Item itensHeld = null;
-	public int lastLevel;
+    public Item itensHeld = null;	
 
     void OnTriggerEnter(Collider col) {
         //SceneManager.LoadScene(1);

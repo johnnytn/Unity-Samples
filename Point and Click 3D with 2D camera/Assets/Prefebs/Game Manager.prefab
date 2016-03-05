@@ -1063,6 +1063,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250cd6cced3f3654a97f51895606c8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 11453498}
+  load: {fileID: 11437896}
 --- !u!114 &11418970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1189,7 +1191,8 @@ MonoBehaviour:
   invetorySize: {x: 4, y: 3}
   slotSize: 50
   windowSize: {x: 300, y: 200}
-  sortedItens: []
+  allItens: []
+  itens: []
   sprites:
   - {fileID: 21300036, guid: 5d9ba96cd9188d44dbac89447dd451b3, type: 3}
   - {fileID: 21300002, guid: 5d9ba96cd9188d44dbac89447dd451b3, type: 3}
@@ -1578,7 +1581,9 @@ MonoBehaviour:
   load: {fileID: 11437896}
   invControl: {fileID: 11431806}
   settings: {fileID: 137684}
-  cursorTexture: {fileID: 2800000, guid: b4931fe97d1ac4e48951e69fb5d4a2f3, type: 3}
+  interactCursor: {fileID: 2800000, guid: 04a7fb7a04a8e6f4198af193e48f8950, type: 3}
+  moveCursor: {fileID: 2800000, guid: b4931fe97d1ac4e48951e69fb5d4a2f3, type: 3}
+  currentLevel: 0
 --- !u!114 &11453732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1646,7 +1651,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11411788}
-        m_MethodName: Load
+        m_MethodName: Continue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1737,7 +1742,8 @@ MonoBehaviour:
   invetorySize: {x: 4, y: 3}
   slotSize: 50
   windowSize: {x: 300, y: 200}
-  sortedItens: []
+  allItens: []
+  itens: []
   sprites:
   - {fileID: 21300036, guid: 5d9ba96cd9188d44dbac89447dd451b3, type: 3}
   - {fileID: 21300002, guid: 5d9ba96cd9188d44dbac89447dd451b3, type: 3}
@@ -3082,7 +3088,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: moveCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: b4931fe97d1ac4e48951e69fb5d4a2f3, type: 3}
+    - target: {fileID: 0}
+      propertyPath: interactCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 04a7fb7a04a8e6f4198af193e48f8950, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 162246}

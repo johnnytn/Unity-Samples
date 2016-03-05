@@ -2318,60 +2318,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 1, z: 0.25}
   m_Center: {x: 0, y: 0.25, z: 0}
---- !u!1001 &957817819
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 475878, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 475878, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 475878, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 475878, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 475878, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 475878, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 475878, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 475878, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 162246, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
-      propertyPath: m_Name
-      value: Game Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 11453498, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
-      propertyPath: interactCursor
-      value: 
-      objectReference: {fileID: 2800000, guid: b4931fe97d1ac4e48951e69fb5d4a2f3, type: 3}
-    - target: {fileID: 11453498, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
-      propertyPath: moveCursor
-      value: 
-      objectReference: {fileID: 2800000, guid: 04a7fb7a04a8e6f4198af193e48f8950, type: 3}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 1abaf82cc91997749b46eda93ddd46b6, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1013922304
 GameObject:
   m_ObjectHideFlags: 0
@@ -3316,7 +3262,6 @@ MonoBehaviour:
     amount: 0
     spritePos: 0
     coords: 
-  lastLevel: 0
 --- !u!114 &1626687596
 MonoBehaviour:
   m_ObjectHideFlags: 0

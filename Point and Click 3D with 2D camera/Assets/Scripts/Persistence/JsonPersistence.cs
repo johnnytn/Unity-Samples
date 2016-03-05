@@ -7,8 +7,14 @@ using LitJson;
 
 public class JsonPersistence {
 
-    public static void Save<T>(T data, string filePath) where T : class {
+    private static string filePath = Application.persistentDataPath + "/gameData.json";
 
+    public static bool saveFileExists() {
+        return File.Exists(filePath);
+    }
+
+    public static void Save<T>(T data) where T : class {
+        //string filePath = Application.persistentDataPath + "/playerInfo.json";
         using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate)) {
             using (StreamWriter writer = new StreamWriter(fs)) {
                 JsonData jsonData = JsonMapper.ToJson(data);
@@ -22,36 +28,15 @@ public class JsonPersistence {
     }
 
     /**
-   * Generic Load - read athe PersistenceData from the Json file
-   */
-    public static T LoadObject<T>(string filename, PersistenceType type) where T : class {
-
-        if (File.Exists(filename)) {
-            try {
-                using (Stream stream = File.OpenRead(filename)) {
-                    String jsonString = File.ReadAllText(filename);
-                    JsonData jsonData = JsonMapper.ToObject(jsonString);
-
-                    return jsonData["Item"] as T;
-                }
-            } catch (Exception e) {
-                Debug.Log(e.Message);
-            }
-        }
-        return null;
-    }
-
-    /**
     * Read the PersistenceData from the Json file
     */
-    public static PersistenceData ReadPersistenceData(string filename) {
-
-        if (File.Exists(filename)) {
+    public static PersistenceData ReadPersistenceData() {
+        //string filePath = Application.persistentDataPath + "/playerInfo.json";
+        if (File.Exists(filePath)) {
             try {
-                using (Stream stream = File.OpenRead(filename)) {
-                    String jsonString = File.ReadAllText(filename);
-                    JsonData jsonData = JsonMapper.ToObject(jsonString);
-
+                using (Stream stream = File.OpenRead(filePath)) {
+                    String jsonString = File.ReadAllText(filePath);
+                    JsonData jsonData = JsonMapper.ToObject(jsonString);                    
                     PersistenceData data = GetPersitenceData(jsonData);
                     return data;
                 }
@@ -67,13 +52,27 @@ public class JsonPersistence {
     */
     private static PersistenceData GetPersitenceData(JsonData jsonData) {
         PersistenceData data = new PersistenceData();
-        Player player = null;
+        GameData gameData = GetGameDataFromJsonData(jsonData); 
         List<Item> itens = GetItemFromJsonData(jsonData);
         data.itens = new List<Item>();
         data.itens.AddRange(itens);
-        data.player = player;
+        data.gameData = gameData;
 
         return data;
+    }
+
+    /**
+    * Retrieve the data from a JsonData and create a GameData with the info
+    */
+    private static GameData GetGameDataFromJsonData(JsonData jsonData) {
+        PersistenceType type = PersistenceType.gameData;
+        GameData gd = null;
+        if (jsonData[type.ToString()].Count == 1) {
+            gd = new GameData();
+            gd.currentLevel = Convert.ToInt32(jsonData[type.ToString()]["currentLevel"].ToString());
+                                 
+        }
+        return gd;
     }
 
     /**
@@ -95,8 +94,27 @@ public class JsonPersistence {
             item.coords = new int[] { x, y };
             itens.Add(item);
         }
-
         return itens;
+    }
+
+    /**
+    * Generic Load - read athe PersistenceData from the Json file
+    */
+    public static T LoadObject<T>(PersistenceType type) where T : class {
+        //string filePath = Application.persistentDataPath + "/playerInfo.json";
+        if (File.Exists(filePath)) {
+            try {
+                using (Stream stream = File.OpenRead(filePath)) {
+                    String jsonString = File.ReadAllText(filePath);
+                    JsonData jsonData = JsonMapper.ToObject(jsonString);
+
+                    return jsonData["Item"] as T;
+                }
+            } catch (Exception e) {
+                Debug.Log(e.Message);
+            }
+        }
+        return null;
     }
 
 }

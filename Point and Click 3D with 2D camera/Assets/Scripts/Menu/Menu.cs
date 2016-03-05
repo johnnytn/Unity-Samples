@@ -1,53 +1,40 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class Menu : MonoBehaviour {
 
-    public Loading load;    
+    public GameManager gameManager;
+    public Loading load;
 
-    public Canvas quitMenu;
-    public Button startButton;
-    public Button exitButton;
-
-    // Use this for initialization
-    void Start() {        
-        quitMenu = quitMenu.GetComponent<Canvas>();
-        startButton = startButton.GetComponent<Button>();
-        exitButton = exitButton.GetComponent<Button>();
-        quitMenu.enabled = false;
-    }
-
-    /** 
-    * Open quit menu
-    */
-    public void QuitMenu() {
-        quitMenu.enabled = true;
-        startButton.enabled = false;
-        exitButton.enabled = false;
-    }
-
-    /** 
-    * Close quit menu
-    */
-    public void CloseQuitMenu() {
-        quitMenu.enabled = false;
-        startButton.enabled = true;
-        exitButton.enabled = true;
-    }
-        
     /** 
     * Load a level
     */
-    public void LoadLevel(int level) {        
+    public void LoadLevel(int level) {
         load.LoadingScene(level);
-		GameManager.gm.player.lastLevel = 1;
+       
+        // Instantiate the game manager
+        GameManager gm = Instantiate(gameManager, new Vector3(0, 0, 0), Quaternion.identity) as GameManager;
+        gm.AwakeGM(0);
+    }
+
+    /** 
+  * Load a level
+  */
+    public void Continue() {
+        PersistenceData data = JsonPersistence.ReadPersistenceData();
+        int level = data.gameData != null & data.gameData.currentLevel > 0 ? data.gameData.currentLevel : 1;
+        load.LoadingScene(level);
+        
+        // Instantiate the game manager
+        GameManager gm = Instantiate(gameManager, new Vector3(0, 0, 0), Quaternion.identity) as GameManager;
+        gm.AwakeGM(level);
     }
 
     /** 
     * Exit the game
     */
-    public void Exit() {
+    public virtual void Exit() {
         Application.Quit();
     }
 

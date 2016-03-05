@@ -27,7 +27,7 @@ public class ChangeScene : Interactables {
         //anim.Play("OpeningDoor", -1, 0f);        
         anim.SetBool("Open", true);
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);        
-        GameManager.gm.player.lastLevel = nextLevel;
+        GameManager.gm.currentLevel = nextLevel;
         StartCoroutine(LoadingScene());
     }
 

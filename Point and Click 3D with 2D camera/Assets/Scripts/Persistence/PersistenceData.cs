@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class PersistenceData  {
 
-    public Player player;
+    public GameData gameData;
     public List<Item> itens;
 
 
