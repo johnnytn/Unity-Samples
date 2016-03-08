@@ -31,7 +31,7 @@ public class Prop : Node {
         // Remove the cursor icon
         Cursor.SetCursor(null, Vector2.zero, cursorMode);
         // Restore the last material
-       // childMesh.material = previousMaterial;
+        // childMesh.material = previousMaterial;
     }
 
     private void changeMouseIcon() {
@@ -56,9 +56,10 @@ public class Prop : Node {
         // Make this object interactable if prerequisite is met
         if (inter != null) {
             Prerequisite pre = GetComponent<Prerequisite>();
-            if (pre && !pre.Complete) {
+            if (pre && !inter.inspectObject && !pre.Complete) {
                 return;
             }
+
             col.enabled = true;
             inter.enabled = true;
             changeMouseIcon();

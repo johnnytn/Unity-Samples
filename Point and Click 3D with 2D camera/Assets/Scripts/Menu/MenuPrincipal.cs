@@ -10,7 +10,7 @@ public class MenuPrincipal : Menu {
     public Button exitButton;
 
     void Awake() {
-        if(continueButton != null) {
+        if (continueButton != null) {
             continueButton.gameObject.SetActive(JsonPersistence.saveFileExists());
         }
     }

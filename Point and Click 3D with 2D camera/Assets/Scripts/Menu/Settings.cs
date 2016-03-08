@@ -30,4 +30,11 @@ public class Settings : Menu {
         Debug.Log("Data saved. ");
     }
 
+    /**
+    * Load game data
+    */
+    public void Load() {
+        Continue();
+    }
+
 }

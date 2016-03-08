@@ -169,7 +169,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11463906, guid: 42b1d3acb5611924f82bb1833559d091, type: 2}
       propertyPath: reachableNodes.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 401038, guid: 42b1d3acb5611924f82bb1833559d091, type: 2}
       propertyPath: m_LocalPosition.x
@@ -218,7 +218,7 @@ Prefab:
     - target: {fileID: 11463906, guid: 42b1d3acb5611924f82bb1833559d091, type: 2}
       propertyPath: reachableNodes.Array.data[1]
       value: 
-      objectReference: {fileID: 1167322317}
+      objectReference: {fileID: 768900376}
     - target: {fileID: 11463906, guid: 42b1d3acb5611924f82bb1833559d091, type: 2}
       propertyPath: reachableNodes.Array.data[2]
       value: 
@@ -888,11 +888,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9efc507b29e27df4dbce6309acecde8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorMode: 0
-  hotSpot: {x: 0, y: 0}
+  inspectObject: 1
   target: {fileID: 768900375}
   firingAngle: 45
   gravity: 50
+  message: Preciso de algo...
   projectile: {fileID: 446294, guid: 916c2ef1257d4a5409584c67339104f7, type: 2}
 --- !u!114 &768900371
 MonoBehaviour:
@@ -981,7 +981,7 @@ MonoBehaviour:
   cameraPosition: {fileID: 1294940761}
   col: {fileID: 0}
   reachableNodes:
-  - {fileID: 1167322317}
+  - {fileID: 128410142}
   loc: {fileID: 1167322317}
   outlinedMaterial: {fileID: 0}
   cursorMode: 0
@@ -1142,6 +1142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18046728ad21df1468a6f63d03d4d23f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inspectObject: 0
   pic: {fileID: 21300000, guid: aff0dc3b1849c82418511f315199e6ed, type: 3}
 --- !u!135 &992331547
 SphereCollider:
@@ -1377,8 +1378,7 @@ Transform:
 --- !u!114 &1167322317
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11463906, guid: 42b1d3acb5611924f82bb1833559d091,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1167322315}
   m_Enabled: 1
@@ -1386,25 +1386,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5107a1dbfb318e499a86ae67d1e177a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPosition: {fileID: 1294940761}
+  cameraPosition: {fileID: 0}
   col: {fileID: 0}
-  reachableNodes:
-  - {fileID: 768900376}
-  - {fileID: 128410142}
-  startingNode: 1
+  reachableNodes: []
+  startingNode: 0
 --- !u!65 &1167322318
 BoxCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6545100, guid: 42b1d3acb5611924f82bb1833559d091,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1167322315}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1267172369
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,7 +1410,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1267172370}
-  - 65: {fileID: 1267172371}
   m_Layer: 0
   m_Name: Carpet
   m_TagString: Untagged
@@ -1428,25 +1424,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1267172369}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.73, y: 0, z: 0}
   m_LocalScale: {x: 7, y: 0.5, z: 5}
   m_Children:
   - {fileID: 146519514}
   m_Father: {fileID: 1167322316}
   m_RootOrder: 1
---- !u!65 &1267172371
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6544156, guid: 42b1d3acb5611924f82bb1833559d091,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1267172369}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.7}
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1 &1287141831
 GameObject:
   m_ObjectHideFlags: 0

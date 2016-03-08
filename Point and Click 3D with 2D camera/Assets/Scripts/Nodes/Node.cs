@@ -15,17 +15,16 @@ public abstract class Node : MonoBehaviour {
         col.enabled = false;
     }
 
-	// On click execute execute an action
+    // On click execute execute an action
     void OnMouseDown() {
         Arrive();
     }
 
-    
     /**
     * Move the player to the node, updating colliders and reachable nodes
     */
     public virtual void Arrive() {
-        // leave existing currentNode
+        // Leave existing currentNode
         Node currentNode = GameManager.gm.currentNote;
         if (currentNode != null) {
             currentNode.Leave();
@@ -48,7 +47,7 @@ public abstract class Node : MonoBehaviour {
     public virtual void Leave() {
         setReachableNode(false);
     }
-    
+
     /**
     * Turn on/off all reachable node's colliders
     */

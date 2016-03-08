@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Receiver : Interactables {
 
-    public CursorMode cursorMode = CursorMode.Auto;
-    public Vector2 hotSpot = Vector2.zero;
+    //public CursorMode cursorMode = CursorMode.Auto;
+    //public Vector2 hotSpot = Vector2.zero;
 
     public Transform target;
     public float firingAngle = 45.0f;
@@ -13,12 +13,9 @@ public class Receiver : Interactables {
     public Transform projectile;
     private Transform myTransform;
 
-    public override void Interact() {        
-        Prerequisite pre = GetComponent<Prerequisite>();
-        if (pre && !pre.Complete) {
-            return;            
-        }
-        
+    public override void Interact() {
+        base.Interact();
+
         if (Input.GetMouseButtonDown(0) && target != null) {
             Vector3 position = GameManager.gm.player.transform.position;
             projectile = Instantiate(projectile, new Vector3(position.x, position.y, 0), Quaternion.identity) as Transform;

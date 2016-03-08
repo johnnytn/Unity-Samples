@@ -17,7 +17,7 @@ public class GameManager : Util {
     public Loading load;
     public InventoryController invControl;
     public GameObject settings;
-   
+
     // Cursor Icon
     public Texture2D interactCursor;
     public Texture2D moveCursor;
@@ -28,11 +28,6 @@ public class GameManager : Util {
         currentLevel = level;
         PrepareGameManager();
         LoadData();
-    }    
-
-    // Update is called once per frame
-    void Update() {
-        CloseInspectors();
     }
 
     void OnLevelWasLoaded(int level) {
@@ -43,26 +38,7 @@ public class GameManager : Util {
         } catch (Exception e) {
             Debug.Log(e.Message);
         }
-        
     }
-
-    /**
-    * Close UI elements used to inspect objects
-    */
-    private void CloseInspectors() {
-        if (Input.GetMouseButtonDown(1) && currentNote != null && currentNote.GetComponent<Prop>() != null) {
-            if (ivCanvas.gameObject.activeInHierarchy) {
-                ivCanvas.Close();
-                return;
-            }
-            if (obsCamera.gameObject.activeInHierarchy) {
-                obsCamera.Close();
-                return;
-            }
-            currentNote.GetComponent<Prop>().loc.Arrive();
-        }
-    }
-
 
     /**
     * Load the Player Data before the game starts
@@ -70,14 +46,12 @@ public class GameManager : Util {
     public void LoadData() {
         PersistenceData data = JsonPersistence.ReadPersistenceData();
         List<ItemController> itensC = new List<ItemController>();
-        Debug.Log(GameManager.gm.currentLevel);
-        Debug.Log(gm.currentLevel);
 
         if (data != null && gm.currentLevel > 0) {
             foreach (Item i in data.itens) {
                 ItemController ic = gameObject.AddComponent<ItemController>();
                 ic.item = i;
-                itensC.Add(ic);            
+                itensC.Add(ic);
             }
         }
         invControl.allItens = itensC;
@@ -95,7 +69,7 @@ public class GameManager : Util {
         }
         DontDestroyOnLoad(gameObject);
         getStartingLocation();
-        getPlayer();           
+        getPlayer();
     }
 
     public void ActiveDeactiveGameObjects(bool active) {

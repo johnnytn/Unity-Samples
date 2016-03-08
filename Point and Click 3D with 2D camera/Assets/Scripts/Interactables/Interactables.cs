@@ -4,16 +4,23 @@ using System.Collections;
 [RequireComponent(typeof(Prop))]
 public abstract class Interactables : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    public bool inspectObject;
+    public string message;
+
+    // Use this for initialization
+    void Start() {
         this.enabled = false;
-	}
+    }
 
     /**
     *Deafult object interaction
     */
     public virtual void Interact() {
-        Debug.Log("interacting with" + name);
+        Prerequisite pre = GetComponent<Prerequisite>();
+        if (pre && !pre.Complete) {
+            Debug.Log(message);
+            return;
+        }
     }
-	
+
 }

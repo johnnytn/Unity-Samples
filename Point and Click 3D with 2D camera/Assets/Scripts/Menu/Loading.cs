@@ -31,7 +31,8 @@ public class Loading : MonoBehaviour {
 
         while (!async.isDone) {
             loadingBar.value = async.progress;
-            yield return null;
+            //yield return null;
+            yield return new WaitForSeconds(1f);
         }
     }
 }
