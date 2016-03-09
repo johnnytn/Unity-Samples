@@ -144,6 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0de0d695098373e42ae805617377a861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inspectObject: 0
+  message: 
   item:
     id: 5
     name: Key

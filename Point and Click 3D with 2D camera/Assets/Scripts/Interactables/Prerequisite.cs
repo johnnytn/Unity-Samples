@@ -9,7 +9,7 @@ public class Prerequisite : MonoBehaviour {
     // if true, check for item
     public bool requireItem;
     //if requireItem is true, we'll check this collector
-    public Collector checkCollector;
+	public Collectable checkCollector;
 
     /**
     * Check if prerequisite is met

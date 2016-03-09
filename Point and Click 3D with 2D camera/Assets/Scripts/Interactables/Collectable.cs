@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using LitJson;
 
-public class Collector : Interactables {
+public class Collectable : Interactables {
 
     public Item item;
     public int spritePos;

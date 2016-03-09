@@ -118,7 +118,14 @@ MonoBehaviour:
   yAxis: {fileID: 412046}
   xAxis: {fileID: 492718}
   moveTime: 0.75
-  itensHeld: []
+  itensHeld:
+    id: 0
+    name: 
+    description: 
+    type: 0
+    amount: 0
+    spritePos: 0
+    coords: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
