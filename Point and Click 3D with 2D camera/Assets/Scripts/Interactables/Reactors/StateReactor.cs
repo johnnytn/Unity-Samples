@@ -6,7 +6,7 @@ public abstract class StateReactor : MonoBehaviour {
     public Switcher switcher;
 
     protected virtual void Awake() {
-        switcher.Change += React;
+			switcher.Change += React;			
     }
 
     public virtual void React() {

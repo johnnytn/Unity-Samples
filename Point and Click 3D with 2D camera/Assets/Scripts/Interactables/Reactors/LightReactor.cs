@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(Light))]
 public class LightReactor : StateReactor {
 
     public bool activeLight;

@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Receiver : Interactables {
-
-    //public CursorMode cursorMode = CursorMode.Auto;
-    //public Vector2 hotSpot = Vector2.zero;
-
+public class Receiver : Switcher {
+	
     public Transform target;
     public float firingAngle = 45.0f;
     public float gravity = 9.8f;
