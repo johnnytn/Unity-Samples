@@ -8,6 +8,7 @@ public abstract class Interactables : MonoBehaviour {
     public string message;
     [HideInInspector]
     public bool interact;
+    protected Prerequisite pre;
 
     // Use this for initialization
     void Start() {
@@ -18,7 +19,7 @@ public abstract class Interactables : MonoBehaviour {
     *Deafult object interaction
     */
     public virtual void Interact() {
-        Prerequisite pre = GetComponent<Prerequisite>();
+        pre = GetComponent<Prerequisite>();
         if (pre && !pre.Complete) {
             Debug.Log(message);
             interact = false;

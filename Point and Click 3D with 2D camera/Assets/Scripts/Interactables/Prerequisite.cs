@@ -9,7 +9,7 @@ public class Prerequisite : MonoBehaviour {
     // if true, check for item
     //public bool requireItem;
     //if requireItem is true, we'll check this collector
-	public Collectable checkCollector;
+	public ItemController itemController;
 
     /**
     * Check if prerequisite is met
@@ -19,11 +19,11 @@ public class Prerequisite : MonoBehaviour {
 			if (watchSwitcher != null) {
                 return watchSwitcher.state;
 
-			} else if(checkCollector != null){
+			} else if(itemController != null){
                 bool isComplete = false;
 
 				foreach(Item ic in GameManager.gm.invControl.itens){
-					isComplete = ic.name.Equals(checkCollector.item.name);
+					isComplete = ic.Equals(itemController.item);
 				
 					if(isComplete){
 						break;

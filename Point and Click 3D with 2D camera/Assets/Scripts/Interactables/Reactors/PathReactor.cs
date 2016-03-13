@@ -10,7 +10,7 @@ public class PathReactor : StateReactor {
     protected override void Awake() {
         base.Awake();
         React();
-        StartCoroutine(DelayedReact());
+        //StartCoroutine(DelayedReact());
     }
 
     /**

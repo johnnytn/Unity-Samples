@@ -29,4 +29,10 @@ public class Item {
         this.spritePos = spritePos;
         this.coords = coords;
     }
+
+    public override bool Equals(object obj) {
+        Item item = (Item)obj;
+        return this.id == item.id && this.name == item.name;
+    }
+
 }

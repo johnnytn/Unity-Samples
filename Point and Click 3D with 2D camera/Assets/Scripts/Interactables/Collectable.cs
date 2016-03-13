@@ -8,6 +8,23 @@ public class Collectable : Interactables {
     public int spritePos;
     public bool canDragItem;
 
+    void Start() {
+        CheckCollected();
+    }
+
+    /**
+    * Check if the item is in the player's inventory
+    */
+    private void CheckCollected() {
+        List<Item> itens = GameManager.gm.invControl.itens;
+        GameManager.gm.invControl.itens.Contains(this.item);
+        foreach (Item item in itens) {
+            if (item.Equals(this.item)) {
+                this.gameObject.SetActive(false);
+            }
+        }
+    }
+
     /**
      * Collect an Item and add to the Player Inventory
      */

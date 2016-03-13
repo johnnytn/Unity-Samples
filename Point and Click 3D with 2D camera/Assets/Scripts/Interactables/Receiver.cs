@@ -1,33 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Prerequisite))]
 public class Receiver : Switcher {
 
     public Transform target;
     public float firingAngle = 45.0f;
     public float gravity = 9.8f;
 
-    public Transform projectile;
-    private Transform myTransform;
+    private Transform projectile;
+    private Vector3 playerPosition;
 
     public override void Interact() {
-        base.Interact();
+         base.Interact();
 
-        if (interact && Input.GetMouseButtonDown(0) && target != null) {
-            Vector3 position = GameManager.gm.player.transform.position;
-            projectile = Instantiate(projectile, new Vector3(position.x, position.y, 0), Quaternion.identity) as Transform;
-            StartCoroutine(SimulateProjectile());
+        if (Input.GetMouseButtonDown(0) && target != null) {
+            Vector3 playerPosition = GameManager.gm.player.transform.position;
+            projectile = Instantiate(pre.itemController.transform, playerPosition, Quaternion.identity) as Transform;
+            StartCoroutine(ThrowProjectile());
         }
 
     }
 
 
-    IEnumerator SimulateProjectile() {
+    IEnumerator ThrowProjectile() {
         // Short delay added before Projectile is thrown
         yield return new WaitForSeconds(0.1f);
 
         // Move projectile to the position of throwing object + add some offset if needed.
-        //projectile.position = myTransform.position + new Vector3(0, 0.0f, 0);
+        //projectile.position = playerPosition + new Vector3(0, 0.0f, 0);
 
         // Calculate distance to target
         float target_Distance = Vector3.Distance(projectile.position, target.position);
