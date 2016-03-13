@@ -24,7 +24,7 @@ public class Receiver : Switcher {
 
     IEnumerator SimulateProjectile() {
         // Short delay added before Projectile is thrown
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
 
         // Move projectile to the position of throwing object + add some offset if needed.
         //projectile.position = myTransform.position + new Vector3(0, 0.0f, 0);

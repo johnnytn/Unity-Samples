@@ -3,6 +3,8 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
+    public GameObject backgroundUI;
+
     // Update is called once per frame
     void Update() {
         CloseInspectors();
@@ -20,11 +22,17 @@ public class GameController : MonoBehaviour {
         bool isActive = inventory.activeInHierarchy;
         inventory.SetActive(!isActive);
         DisablePlayer(!isActive);
+        backgroundUI.SetActive(!isActive);
     }
 
+    /**
+   * Open/close Settings Menu
+   */
     public void ToggleSettings() {
         GameObject settings = GameManager.gm.settings;
-        settings.SetActive(!settings.activeInHierarchy);
+        bool isActive = settings.activeInHierarchy;
+        settings.SetActive(!isActive);
+        backgroundUI.SetActive(!isActive);
     }
 
     private void DisablePlayer(bool flag) {
