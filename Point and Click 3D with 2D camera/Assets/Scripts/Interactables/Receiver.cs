@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Receiver : Switcher {
-	
+
     public Transform target;
     public float firingAngle = 45.0f;
     public float gravity = 9.8f;
@@ -13,7 +13,7 @@ public class Receiver : Switcher {
     public override void Interact() {
         base.Interact();
 
-        if (Input.GetMouseButtonDown(0) && target != null) {
+        if (interact && Input.GetMouseButtonDown(0) && target != null) {
             Vector3 position = GameManager.gm.player.transform.position;
             projectile = Instantiate(projectile, new Vector3(position.x, position.y, 0), Quaternion.identity) as Transform;
             StartCoroutine(SimulateProjectile());

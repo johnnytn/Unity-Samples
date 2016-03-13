@@ -10,9 +10,11 @@ public class Switcher : Interactables {
     public event OnStateChange Change;
 
     public override void Interact() {
-        state = !state;    
-        if(Change != null) {
+        base.Interact();
+        if (Change != null && interact) {
+            state = !state;
             Change();
+            return;
         }
     }
 

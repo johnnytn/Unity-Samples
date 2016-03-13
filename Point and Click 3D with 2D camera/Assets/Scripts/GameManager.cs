@@ -24,30 +24,29 @@ public class GameManager : Util {
 
     public int currentLevel = 0;
 
-    public void AwakeGM(int level) {
+
+    public void AwakeGM(int level, bool isNewGame) {
         currentLevel = level;
         PrepareGameManager();
-        LoadData();
+        LoadData(isNewGame);
     }
 
     void OnLevelWasLoaded(int level) {
-        try {
-            getStartingLocation();
-            getPlayer();
-            gm.startingNode.Arrive();
-        } catch (Exception e) {
-            Debug.Log(e.Message);
-        }
+        getStartingLocation();
+        getPlayer();
+        gm.startingNode.Arrive();
     }
 
     /**
-    * Load the Player Data before the game starts
+    * Load the Player Data before the game starts:
+    * - Load itens;
+    * - Create inventory and itens.
     */
-    public void LoadData() {
+    public void LoadData(bool isNewGame) {
         PersistenceData data = JsonPersistence.ReadPersistenceData();
         List<ItemController> itensC = new List<ItemController>();
 
-        if (data != null && gm.currentLevel > 0) {
+        if (data != null && !isNewGame) {
             foreach (Item i in data.itens) {
                 ItemController ic = gameObject.AddComponent<ItemController>();
                 ic.item = i;
@@ -60,6 +59,7 @@ public class GameManager : Util {
 
     /**
     * Prepare GM before the game starts
+    * - Search for the player and the starting node.
     */
     public void PrepareGameManager() {
         if (gm == null) {
@@ -72,12 +72,14 @@ public class GameManager : Util {
         getPlayer();
     }
 
+    /**
+    * Active or Deactive gameObjects in the UI
+    */
     public void ActiveDeactiveGameObjects(bool active) {
         ivCanvas.gameObject.SetActive(active);
         obsCamera.gameObject.SetActive(active);
         invDisp.gameObject.SetActive(active);
         invControl.gameObject.SetActive(active);
-
     }
 
 }

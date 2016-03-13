@@ -5,8 +5,7 @@ public class ItemController : MonoBehaviour {
 
     public bool canDragItem;
     public Item item;
-   // public Sprite sprite;
-   // public Vector2 coords;
+
 
     /**
     * Set the references of the slot into the InventoryController using an Event Trigger
@@ -19,12 +18,12 @@ public class ItemController : MonoBehaviour {
         }
     }
 
-    
-
+    /**
+    * Increase the item amount
+    */
     public void IncreaseAmount(int amount) {
         item.amount += amount;
         transform.Find("Amount").GetComponent<Text>().text = item.amount.ToString();
-
     }
 
 }

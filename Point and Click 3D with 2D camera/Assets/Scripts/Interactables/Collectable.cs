@@ -25,7 +25,7 @@ public class Collectable : Interactables {
         gm.invDisp.UpdateDisplay();
         // Reset the cursor icon before detroy the Item
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-        GameObject.Destroy(this.gameObject, 0.1f);
+        this.gameObject.SetActive(false);
     }
 
     private ItemController createItemController() {

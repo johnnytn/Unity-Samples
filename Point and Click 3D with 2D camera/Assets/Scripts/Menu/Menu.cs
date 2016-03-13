@@ -8,28 +8,34 @@ public class Menu : MonoBehaviour {
     public Loading load;
 
     /** 
-    * Load a level
+    * Start a New Game
     */
-    public void LoadLevel(int level) {
-        load.LoadingScene(level);
-       
-        // Instantiate the game manager
-        GameManager gm = Instantiate(gameManager, new Vector3(0, 0, 0), Quaternion.identity) as GameManager;
-        gm.AwakeGM(0);
+    public void NewGame() {
+        this.LoadLevel(1, true);
     }
 
     /** 
-  * Load a level
-  */
+    * Continue a game
+    */
     public void Continue() {
         PersistenceData data = JsonPersistence.ReadPersistenceData();
         int level = data.gameData != null & data.gameData.currentLevel > 0 ? data.gameData.currentLevel : 1;
+
+        this.LoadLevel(level, false);
+    }
+
+    /** 
+    * Load a level
+    */
+    private void LoadLevel(int level, bool isNewGame) {
         load.LoadingScene(level);
-        
+
         // Instantiate the game manager
         GameManager gm = Instantiate(gameManager, new Vector3(0, 0, 0), Quaternion.identity) as GameManager;
-        gm.AwakeGM(level);
+        gm.AwakeGM(level, isNewGame);
     }
+
+
 
     /** 
     * Exit the game

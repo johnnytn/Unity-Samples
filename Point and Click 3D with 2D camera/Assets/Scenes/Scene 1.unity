@@ -498,6 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inspectObject: 0
   message: 
+  interact: 0
   item:
     id: 5
     name: Key
@@ -685,6 +686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inspectObject: 0
   message: 
+  interact: 0
   pic: {fileID: 21300000, guid: aff0dc3b1849c82418511f315199e6ed, type: 3}
 --- !u!1 &364504189
 GameObject:
@@ -1865,6 +1867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inspectObject: 0
   message: 
+  interact: 0
 --- !u!114 &1614874855
 MonoBehaviour:
   m_ObjectHideFlags: 0

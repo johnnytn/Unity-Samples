@@ -14,16 +14,19 @@ public class JsonPersistence {
     }
 
     public static void Save<T>(T data) where T : class {
-        //string filePath = Application.persistentDataPath + "/playerInfo.json";
-        using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate)) {
-            using (StreamWriter writer = new StreamWriter(fs)) {
-                JsonData jsonData = JsonMapper.ToJson(data);
-                writer.Write(jsonData.ToString());
-                writer.Close();
-                writer.Dispose();
+        try {
+            using (FileStream fs = new FileStream(filePath, FileMode.Create)) {
+                using (StreamWriter writer = new StreamWriter(fs)) {
+                    JsonData jsonData = JsonMapper.ToJson(data);
+                    writer.Write(jsonData.ToString());
+                    writer.Close();
+                    writer.Dispose();
+                }
+                fs.Close();
+                fs.Dispose();
             }
-            fs.Close();
-            fs.Dispose();
+        } catch (Exception e) {
+            Debug.Log(e.Message);
         }
     }
 
@@ -36,7 +39,7 @@ public class JsonPersistence {
             try {
                 using (Stream stream = File.OpenRead(filePath)) {
                     String jsonString = File.ReadAllText(filePath);
-                    JsonData jsonData = JsonMapper.ToObject(jsonString);                    
+                    JsonData jsonData = JsonMapper.ToObject(jsonString);
                     PersistenceData data = GetPersitenceData(jsonData);
                     return data;
                 }
@@ -52,7 +55,7 @@ public class JsonPersistence {
     */
     private static PersistenceData GetPersitenceData(JsonData jsonData) {
         PersistenceData data = new PersistenceData();
-        GameData gameData = GetGameDataFromJsonData(jsonData); 
+        GameData gameData = GetGameDataFromJsonData(jsonData);
         List<Item> itens = GetItemFromJsonData(jsonData);
         data.itens = new List<Item>();
         data.itens.AddRange(itens);
@@ -70,7 +73,7 @@ public class JsonPersistence {
         if (jsonData[type.ToString()].Count == 1) {
             gd = new GameData();
             gd.currentLevel = Convert.ToInt32(jsonData[type.ToString()]["currentLevel"].ToString());
-                                 
+
         }
         return gd;
     }

@@ -44,14 +44,19 @@ public class Prop : Node {
     }
 
     /** 
-    * Arrive in the node
+    * Arrive in the node:
+    * - Interact with the prop if it's enabled;
+    * - Make this object interactable if prerequisite is met.
     */
     public override void Arrive() {
         if (inter != null && inter.enabled) {
             inter.Interact();
             return;
         }
-        base.Arrive();
+        PathReactor path = GetComponent<PathReactor>();
+        if (path == null || path.switcher.state) {
+            base.Arrive();
+        }
 
         // Make this object interactable if prerequisite is met
         if (inter != null) {
@@ -59,7 +64,6 @@ public class Prop : Node {
             if (pre && !inter.inspectObject && !pre.Complete) {
                 return;
             }
-
             col.enabled = true;
             inter.enabled = true;
             changeMouseIcon();

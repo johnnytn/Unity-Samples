@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class Settings : Menu {
@@ -8,13 +9,10 @@ public class Settings : Menu {
     */
     private PersistenceData CreatePersistenceData() {
         GameManager gm = GameManager.gm;
-        List<ItemController> itensC = gm.invControl.allItens;
         List<Item> itens = new List<Item>();
-        foreach (ItemController ic in itensC) {
-            itens.Add(ic.item);
-        }
-        GameData gameData = new GameData(gm.currentLevel);
+        itens.AddRange(gm.invControl.itens);
 
+        GameData gameData = new GameData(gm.currentLevel);
         PersistenceData data = new PersistenceData();
         data.itens = itens;
         data.gameData = gameData;
@@ -25,7 +23,7 @@ public class Settings : Menu {
     /**
     * Save game data
     */
-    public void Save() {        
+    public void Save() {
         JsonPersistence.Save<PersistenceData>(CreatePersistenceData());
         Debug.Log("Data saved. ");
     }
