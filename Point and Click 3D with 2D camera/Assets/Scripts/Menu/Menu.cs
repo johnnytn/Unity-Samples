@@ -11,7 +11,7 @@ public class Menu : MonoBehaviour {
     * Start a New Game
     */
     public void NewGame() {
-        this.LoadLevel(1, true);
+        this.LoadLevel(0, true);
     }
 
     /** 

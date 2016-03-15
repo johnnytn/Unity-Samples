@@ -14,7 +14,7 @@ public class Receiver : Switcher {
     public override void Interact() {
          base.Interact();
 
-        if (Input.GetMouseButtonDown(0) && target != null) {
+		if (Input.GetMouseButtonDown(0) && target != null && interact) {
             Vector3 playerPosition = GameManager.gm.player.transform.position;
             projectile = Instantiate(pre.itemController.transform, playerPosition, Quaternion.identity) as Transform;
             StartCoroutine(ThrowProjectile());
